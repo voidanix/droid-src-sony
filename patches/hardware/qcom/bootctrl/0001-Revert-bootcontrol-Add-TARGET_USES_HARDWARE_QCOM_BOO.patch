@@ -1,0 +1,31 @@
+From e3b6f2235aa2b856933c41abd6c1e2e8cc35ece5 Mon Sep 17 00:00:00 2001
+From: Franz-Josef Haider <f_haider@gmx.at>
+Date: Wed, 19 Jun 2019 10:07:50 +0000
+Subject: [PATCH 1/3] Revert "bootcontrol: Add
+ TARGET_USES_HARDWARE_QCOM_BOOTCTRL"
+
+This reverts commit f5db01c3b14d720f3d603cfb3b887d89c2b11b28.
+---
+ Android.mk | 7 +------
+ 1 file changed, 1 insertion(+), 6 deletions(-)
+
+diff --git a/Android.mk b/Android.mk
+index 7f22f75..7857a83 100644
+--- a/Android.mk
++++ b/Android.mk
+@@ -1,11 +1,6 @@
+-# Preset TARGET_USES_HARDWARE_QCOM_BOOTCTRL for existing platforms.
+-ifneq ($(filter msm8996 msm8998 sdm845 sdm710,$(TARGET_BOARD_PLATFORM)),)
+-TARGET_USES_HARDWARE_QCOM_BOOTCTRL := true
+-endif
+-
+-ifeq ($(strip $(TARGET_USES_HARDWARE_QCOM_BOOTCTRL)),true)
+ # TODO:  Find a better way to separate build configs for ADP vs non-ADP devices
+ ifneq ($(BOARD_IS_AUTOMOTIVE),true)
++ifneq ($(filter msm8996 msm8998 sdm845 sdm710,$(TARGET_BOARD_PLATFORM)),)
+ LOCAL_PATH := $(call my-dir)
+ 
+ # HAL Shared library for the target. Used by libhardware.
+-- 
+2.17.1
+

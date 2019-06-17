@@ -1,0 +1,311 @@
+From eda452392f56094db5f791652ff731416fdc0497 Mon Sep 17 00:00:00 2001
+From: Franz-Josef Haider <f_haider@gmx.at>
+Date: Wed, 19 Jun 2019 10:07:40 +0000
+Subject: [PATCH 5/6] Revert "DO NOT MERGE: Revert "Revert "sdm845: Add
+ libprocessgroup dependency to set_sched_policy users"""
+
+This reverts commit db96236976a195bda833d821d584bc76ea4cdbae.
+---
+ core/Android.mk                                             | 3 +--
+ loc_api/libloc_api_50001/Android.mk                         | 6 ++----
+ msm8084/core/Android.mk                                     | 3 +--
+ msm8084/loc_api/libloc_api_50001/Android.mk                 | 6 ++----
+ msm8909/loc_api/libloc_api_50001/Android.mk                 | 6 ++----
+ msm8909/utils/Android.mk                                    | 3 +--
+ msm8960/core/Android.mk                                     | 3 +--
+ msm8960/loc_api/libloc_api_50001/Android.mk                 | 6 ++----
+ msm8994/core/Android.mk                                     | 3 +--
+ msm8994/loc_api/libloc_api_50001/Android.mk                 | 6 ++----
+ msm8996/loc_api/libloc_api_50001/Android.mk                 | 6 ++----
+ msm8996/utils/Android.mk                                    | 3 +--
+ msm8998/utils/Android.mk                                    | 3 +--
+ .../utils/platform_lib_abstractions/loc_pla/src/Android.mk  | 3 +--
+ sdm845/utils/Android.mk                                     | 3 +--
+ sdm845/utils/MsgTask.cpp                                    | 1 -
+ 16 files changed, 21 insertions(+), 43 deletions(-)
+
+diff --git a/core/Android.mk b/core/Android.mk
+index 859ac03..58c4a12 100644
+--- a/core/Android.mk
++++ b/core/Android.mk
+@@ -20,8 +20,7 @@ LOCAL_SHARED_LIBRARIES := \
+     libutils \
+     libcutils \
+     libgps.utils \
+-    libdl \
+-    libprocessgroup
++    libdl
+ 
+ LOCAL_SRC_FILES += \
+     MsgTask.cpp \
+diff --git a/loc_api/libloc_api_50001/Android.mk b/loc_api/libloc_api_50001/Android.mk
+index 4992540..74d5423 100644
+--- a/loc_api/libloc_api_50001/Android.mk
++++ b/loc_api/libloc_api_50001/Android.mk
+@@ -16,8 +16,7 @@ LOCAL_SHARED_LIBRARIES := \
+     libdl \
+     liblog \
+     libloc_core \
+-    libgps.utils \
+-    libprocessgroup
++    libgps.utils
+ 
+ LOCAL_SRC_FILES += \
+     loc_eng.cpp \
+@@ -75,8 +74,7 @@ LOCAL_SHARED_LIBRARIES := \
+     libloc_eng \
+     libloc_core \
+     libgps.utils \
+-    libdl \
+-    libprocessgroup
++    libdl
+ 
+ ifneq ($(filter $(TARGET_DEVICE), apq8084 msm8960), false)
+ endif
+diff --git a/msm8084/core/Android.mk b/msm8084/core/Android.mk
+index e1df540..c7ea75c 100644
+--- a/msm8084/core/Android.mk
++++ b/msm8084/core/Android.mk
+@@ -15,8 +15,7 @@ LOCAL_SHARED_LIBRARIES := \
+     liblog \
+     libcutils \
+     libgps.utils \
+-    libdl \
+-    libprocessgroup
++    libdl
+ 
+ LOCAL_SRC_FILES += \
+     MsgTask.cpp \
+diff --git a/msm8084/loc_api/libloc_api_50001/Android.mk b/msm8084/loc_api/libloc_api_50001/Android.mk
+index 87b248e..e38befa 100644
+--- a/msm8084/loc_api/libloc_api_50001/Android.mk
++++ b/msm8084/loc_api/libloc_api_50001/Android.mk
+@@ -16,8 +16,7 @@ LOCAL_SHARED_LIBRARIES := \
+     libdl \
+     liblog \
+     libloc_core \
+-    libgps.utils \
+-    libprocessgroup
++    libgps.utils
+ 
+ LOCAL_SRC_FILES += \
+     loc_eng.cpp \
+@@ -75,8 +74,7 @@ LOCAL_SHARED_LIBRARIES := \
+     libloc_eng \
+     libloc_core \
+     libgps.utils \
+-    libdl \
+-    libprocessgroup
++    libdl
+ 
+ LOCAL_SRC_FILES += \
+     loc.cpp \
+diff --git a/msm8909/loc_api/libloc_api_50001/Android.mk b/msm8909/loc_api/libloc_api_50001/Android.mk
+index 08835d6..2353a37 100644
+--- a/msm8909/loc_api/libloc_api_50001/Android.mk
++++ b/msm8909/loc_api/libloc_api_50001/Android.mk
+@@ -16,8 +16,7 @@ LOCAL_SHARED_LIBRARIES := \
+     libdl \
+     liblog \
+     libloc_core \
+-    libgps.utils \
+-    libprocessgroup
++    libgps.utils
+ 
+ LOCAL_SRC_FILES += \
+     loc_eng.cpp \
+@@ -76,8 +75,7 @@ LOCAL_SHARED_LIBRARIES := \
+     libloc_eng \
+     libloc_core \
+     libgps.utils \
+-    libdl \
+-    libprocessgroup
++    libdl
+ 
+ ifneq ($(filter $(TARGET_DEVICE), apq8084 msm8960), false)
+ endif
+diff --git a/msm8909/utils/Android.mk b/msm8909/utils/Android.mk
+index b7e30fb..289926c 100644
+--- a/msm8909/utils/Android.mk
++++ b/msm8909/utils/Android.mk
+@@ -10,8 +10,7 @@ include $(CLEAR_VARS)
+ LOCAL_SHARED_LIBRARIES := \
+     libutils \
+     libcutils \
+-    liblog \
+-    libprocessgroup
++    liblog
+ 
+ LOCAL_SRC_FILES += \
+     loc_log.cpp \
+diff --git a/msm8960/core/Android.mk b/msm8960/core/Android.mk
+index dc2b31a..3144313 100644
+--- a/msm8960/core/Android.mk
++++ b/msm8960/core/Android.mk
+@@ -12,8 +12,7 @@ LOCAL_SHARED_LIBRARIES := \
+     liblog \
+     libcutils \
+     libgps.utils \
+-    libdl \
+-    libprocessgroup
++    libdl
+ 
+ LOCAL_SRC_FILES += \
+     MsgTask.cpp \
+diff --git a/msm8960/loc_api/libloc_api_50001/Android.mk b/msm8960/loc_api/libloc_api_50001/Android.mk
+index 9f60c5d..b9a63b0 100644
+--- a/msm8960/loc_api/libloc_api_50001/Android.mk
++++ b/msm8960/loc_api/libloc_api_50001/Android.mk
+@@ -16,8 +16,7 @@ LOCAL_SHARED_LIBRARIES := \
+     libdl \
+     liblog \
+     libloc_core \
+-    libgps.utils \
+-    libprocessgroup
++    libgps.utils
+ 
+ LOCAL_SRC_FILES += \
+     loc_eng.cpp \
+@@ -75,8 +74,7 @@ LOCAL_SHARED_LIBRARIES := \
+     libloc_eng \
+     libloc_core \
+     libgps.utils \
+-    libdl \
+-    libprocessgroup
++    libdl
+ 
+ LOCAL_SRC_FILES += \
+     loc.cpp \
+diff --git a/msm8994/core/Android.mk b/msm8994/core/Android.mk
+index a8b8995..46d5343 100644
+--- a/msm8994/core/Android.mk
++++ b/msm8994/core/Android.mk
+@@ -21,8 +21,7 @@ LOCAL_SHARED_LIBRARIES := \
+     liblog \
+     libcutils \
+     libgps.utils \
+-    libdl \
+-    libprocessgroup
++    libdl
+ 
+ LOCAL_SRC_FILES += \
+     MsgTask.cpp \
+diff --git a/msm8994/loc_api/libloc_api_50001/Android.mk b/msm8994/loc_api/libloc_api_50001/Android.mk
+index 4992540..74d5423 100644
+--- a/msm8994/loc_api/libloc_api_50001/Android.mk
++++ b/msm8994/loc_api/libloc_api_50001/Android.mk
+@@ -16,8 +16,7 @@ LOCAL_SHARED_LIBRARIES := \
+     libdl \
+     liblog \
+     libloc_core \
+-    libgps.utils \
+-    libprocessgroup
++    libgps.utils
+ 
+ LOCAL_SRC_FILES += \
+     loc_eng.cpp \
+@@ -75,8 +74,7 @@ LOCAL_SHARED_LIBRARIES := \
+     libloc_eng \
+     libloc_core \
+     libgps.utils \
+-    libdl \
+-    libprocessgroup
++    libdl
+ 
+ ifneq ($(filter $(TARGET_DEVICE), apq8084 msm8960), false)
+ endif
+diff --git a/msm8996/loc_api/libloc_api_50001/Android.mk b/msm8996/loc_api/libloc_api_50001/Android.mk
+index c517a23..5182318 100644
+--- a/msm8996/loc_api/libloc_api_50001/Android.mk
++++ b/msm8996/loc_api/libloc_api_50001/Android.mk
+@@ -17,8 +17,7 @@ LOCAL_SHARED_LIBRARIES := \
+     libdl \
+     liblog \
+     libloc_core \
+-    libgps.utils \
+-    libprocessgroup
++    libgps.utils
+ 
+ LOCAL_SRC_FILES += \
+     loc_eng.cpp \
+@@ -75,8 +74,7 @@ LOCAL_SHARED_LIBRARIES := \
+     libloc_eng \
+     libloc_core \
+     libgps.utils \
+-    libdl \
+-    libprocessgroup
++    libdl
+ 
+ ifneq ($(filter $(TARGET_DEVICE), apq8084 msm8960), false)
+ endif
+diff --git a/msm8996/utils/Android.mk b/msm8996/utils/Android.mk
+index f347d47..a322d0f 100644
+--- a/msm8996/utils/Android.mk
++++ b/msm8996/utils/Android.mk
+@@ -10,8 +10,7 @@ include $(CLEAR_VARS)
+ LOCAL_SHARED_LIBRARIES := \
+     libutils \
+     libcutils \
+-    liblog \
+-    libprocessgroup
++    liblog
+ 
+ LOCAL_SRC_FILES += \
+     loc_log.cpp \
+diff --git a/msm8998/utils/Android.mk b/msm8998/utils/Android.mk
+index b97dad3..ff18f2f 100644
+--- a/msm8998/utils/Android.mk
++++ b/msm8998/utils/Android.mk
+@@ -12,8 +12,7 @@ LOCAL_SHARED_LIBRARIES := \
+     libutils \
+     libcutils \
+     liblog \
+-    libloc_pla \
+-    libprocessgroup
++    libloc_pla
+ 
+ LOCAL_SRC_FILES += \
+     loc_log.cpp \
+diff --git a/msm8998/utils/platform_lib_abstractions/loc_pla/src/Android.mk b/msm8998/utils/platform_lib_abstractions/loc_pla/src/Android.mk
+index c029bc7..0d2afe7 100644
+--- a/msm8998/utils/platform_lib_abstractions/loc_pla/src/Android.mk
++++ b/msm8998/utils/platform_lib_abstractions/loc_pla/src/Android.mk
+@@ -11,8 +11,7 @@ LOCAL_SHARED_LIBRARIES := \
+     libutils \
+     libcutils \
+     liblog \
+-    libloc_stub \
+-    libprocessgroup
++    libloc_stub
+ 
+ LOCAL_SRC_FILES += \
+         platform_lib_gettid.cpp \
+diff --git a/sdm845/utils/Android.mk b/sdm845/utils/Android.mk
+index 40882a7..093b88c 100644
+--- a/sdm845/utils/Android.mk
++++ b/sdm845/utils/Android.mk
+@@ -11,8 +11,7 @@ include $(CLEAR_VARS)
+ LOCAL_SHARED_LIBRARIES := \
+     libutils \
+     libcutils \
+-    liblog \
+-    libprocessgroup
++    liblog
+ 
+ LOCAL_SRC_FILES += \
+     loc_log.cpp \
+diff --git a/sdm845/utils/MsgTask.cpp b/sdm845/utils/MsgTask.cpp
+index 5f73f00..eaead5c 100644
+--- a/sdm845/utils/MsgTask.cpp
++++ b/sdm845/utils/MsgTask.cpp
+@@ -35,7 +35,6 @@
+ #include <log_util.h>
+ #include <loc_log.h>
+ #include <loc_pla.h>
+-#include <processgroup/sched_policy.h>
+ 
+ static void LocMsgDestroy(void* msg) {
+     delete (LocMsg*)msg;
+-- 
+2.17.1
+

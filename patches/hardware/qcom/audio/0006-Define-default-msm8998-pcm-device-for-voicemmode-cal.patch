@@ -1,0 +1,29 @@
+From d510c8551f3f9546b1a2b88d1e8522b907658a13 Mon Sep 17 00:00:00 2001
+From: Adrien Bioteau <adrien.bioteau@gmail.com>
+Date: Thu, 9 Aug 2018 09:30:14 +0200
+Subject: [PATCH 6/9] Define default msm8998 pcm device for voicemmode call
+
+Test: manual - build ok. sound ok
+
+Change-Id: I9c7aa65bdcc0e460e287fd8e602b3a12e5be2191
+---
+ hal/msm8974/platform.h | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/hal/msm8974/platform.h b/hal/msm8974/platform.h
+index f6c5a58..c8359dd 100644
+--- a/hal/msm8974/platform.h
++++ b/hal/msm8974/platform.h
+@@ -320,6 +320,9 @@ enum {
+ #ifdef PLATFORM_MSM8996
+ #define VOICEMMODE1_CALL_PCM_DEVICE 2
+ #define VOICEMMODE2_CALL_PCM_DEVICE 22
++#elif PLATFORM_MSM8998
++#define VOICEMMODE1_CALL_PCM_DEVICE 2
++#define VOICEMMODE2_CALL_PCM_DEVICE 19
+ #else
+ #define VOICEMMODE1_CALL_PCM_DEVICE 44
+ #define VOICEMMODE2_CALL_PCM_DEVICE 45
+-- 
+2.17.1
+
