@@ -28,6 +28,7 @@
 %define dhs_sources \
 Source52: %{dhs_name_hardcoded}.spec.tmpl\
 Source53: source.paths\
+Source54: apply-patches.sh\
 %{nil}
 
 # repo service performed : %%include dhs/droid-hal-source.inc
