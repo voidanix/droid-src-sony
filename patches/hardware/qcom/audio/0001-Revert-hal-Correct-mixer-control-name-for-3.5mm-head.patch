@@ -1,7 +1,7 @@
-From 563654c4d8239990a759488fe4a93a68f2fa1532 Mon Sep 17 00:00:00 2001
-From: Franz-Josef Haider <f_haider@gmx.at>
-Date: Wed, 19 Jun 2019 10:07:41 +0000
-Subject: [PATCH 3/9] Revert "hal: Correct mixer control name for 3.5mm
+From 0975543d4ff4b5304901c8737dc2dba23a0de872 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Bj=C3=B6rn=20Bidar?= <theodorstormgrade@gmail.com>
+Date: Fri, 11 Oct 2019 01:54:01 +0200
+Subject: [PATCH 1/7] Revert "hal: Correct mixer control name for 3.5mm
  headphone"
 
 This reverts commit 39a2b8a03c0a8a44940ac732f636d9cc1959eff2.
@@ -10,10 +10,10 @@ This reverts commit 39a2b8a03c0a8a44940ac732f636d9cc1959eff2.
  1 file changed, 4 insertions(+), 11 deletions(-)
 
 diff --git a/hal/msm8974/platform.c b/hal/msm8974/platform.c
-index 55d6082..c92e632 100644
+index 41d8bd2..17d4fe9 100644
 --- a/hal/msm8974/platform.c
 +++ b/hal/msm8974/platform.c
-@@ -1459,17 +1459,10 @@ platform_backend_config_init(struct platform_data *pdata)
+@@ -1582,17 +1582,10 @@ platform_backend_config_init(struct platform_data *pdata)
      pdata->current_backend_cfg[USB_AUDIO_TX_BACKEND].channels_mixer_ctl =
              strdup("USB_AUDIO_TX Channels");
  
@@ -36,5 +36,5 @@ index 55d6082..c92e632 100644
      pdata->current_backend_cfg[USB_AUDIO_RX_BACKEND].bitwidth_mixer_ctl =
              strdup("USB_AUDIO_RX Format");
 -- 
-2.17.1
+2.23.0
 

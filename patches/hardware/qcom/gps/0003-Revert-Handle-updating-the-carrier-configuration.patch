@@ -1,7 +1,7 @@
-From 0f395421595f7d7222fb492a79192dcafc054836 Mon Sep 17 00:00:00 2001
-From: Franz-Josef Haider <f_haider@gmx.at>
-Date: Wed, 19 Jun 2019 10:07:40 +0000
-Subject: [PATCH 3/6] Revert "Handle updating the carrier configuration"
+From decab33438c8ef0517ab484933f3c05216d4b3d8 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Bj=C3=B6rn=20Bidar?= <theodorstormgrade@gmail.com>
+Date: Fri, 11 Oct 2019 01:54:01 +0200
+Subject: [PATCH 3/5] Revert "Handle updating the carrier configuration"
 
 This reverts commit f475797d3c031ae97a393fa3e899034836fe7ba6.
 ---
@@ -107,7 +107,7 @@ index 1ab6942..5fde5e7 100644
      // if necessary.
      inline virtual void setUlpProxyCommand(UlpProxyBase* ulp) {
 diff --git a/sdm845/core/LocApiBase.cpp b/sdm845/core/LocApiBase.cpp
-index c317d59..1eb2621 100644
+index d06fddf..709514d 100644
 --- a/sdm845/core/LocApiBase.cpp
 +++ b/sdm845/core/LocApiBase.cpp
 @@ -1,4 +1,4 @@
@@ -135,7 +135,7 @@ index c317d59..1eb2621 100644
  bool LocApiBase::isInSession()
  {
      bool inSession = false;
-@@ -655,7 +643,7 @@ void LocApiBase::
+@@ -654,7 +642,7 @@ void LocApiBase::
  DEFAULT_IMPL()
  
  int LocApiBase::
@@ -187,7 +187,7 @@ index 6cd410a..d30461e 100644
  # supl version 1.0
  SUPL_VER=0x10000
 diff --git a/sdm845/gnss/GnssAdapter.cpp b/sdm845/gnss/GnssAdapter.cpp
-index 9cc4edf..80423b3 100644
+index 04750b6..6cd43d4 100644
 --- a/sdm845/gnss/GnssAdapter.cpp
 +++ b/sdm845/gnss/GnssAdapter.cpp
 @@ -1,4 +1,4 @@
@@ -205,7 +205,7 @@ index 9cc4edf..80423b3 100644
      mUlpProxy(new UlpProxyBase()),
      mUlpPositionMode(),
      mGnssSvIdUsedInPosition(),
-@@ -770,10 +770,6 @@ GnssAdapter::gnssUpdateConfigCommand(GnssConfig config)
+@@ -822,10 +822,6 @@ GnssAdapter::gnssUpdateConfigCommand(GnssConfig config)
              if (mConfig.flags & GNSS_CONFIG_FLAGS_GPS_LOCK_VALID_BIT) {
                  uint32_t newGpsLock = mAdapter.convertGpsLock(mConfig.gpsLock);
                  ContextBase::mGps_conf.GPS_LOCK = newGpsLock;
@@ -217,5 +217,5 @@ index 9cc4edf..80423b3 100644
                      err = mApi.setGpsLock(mConfig.gpsLock);
                  }
 -- 
-2.17.1
+2.23.0
 

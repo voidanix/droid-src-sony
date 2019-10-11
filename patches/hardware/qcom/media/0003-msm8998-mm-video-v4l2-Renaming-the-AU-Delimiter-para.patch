@@ -1,4 +1,4 @@
-From 0be172fdbe73fd844f3555a91b71c9b5c8b71b19 Mon Sep 17 00:00:00 2001
+From 873bb139ba85e9d320e9729fbfb114ffc4a0ff7d Mon Sep 17 00:00:00 2001
 From: Vikas Reddy Pachika <vpachi@codeaurora.org>
 Date: Wed, 21 Dec 2016 15:55:43 +0530
 Subject: [PATCH 3/3] msm8998: mm-video-v4l2: Renaming the AU-Delimiter
@@ -108,5 +108,5 @@ index c5fceb8..dc2c8ac 100644
  
      DEBUG_PRINT_HIGH("Set au delimiter: %d", enable);
 -- 
-2.17.1
+2.23.0
 

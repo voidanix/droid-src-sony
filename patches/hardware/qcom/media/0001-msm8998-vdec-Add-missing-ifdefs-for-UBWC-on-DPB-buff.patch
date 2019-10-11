@@ -1,4 +1,4 @@
-From 473ccb9ea229d21193c0c693d273552f8568f8a4 Mon Sep 17 00:00:00 2001
+From 00e9399f55ecb14dc634ffacc37243229057d6d7 Mon Sep 17 00:00:00 2001
 From: "Angelo G. Del Regno" <kholk11@gmail.com>
 Date: Thu, 9 Aug 2018 11:00:42 +0200
 Subject: [PATCH 1/3] msm8998: vdec: Add missing ifdefs for UBWC on DPB buffer
@@ -20,7 +20,7 @@ Change-Id: I76131db5272b97016679c5bc0bf6ae099167cd03
  1 file changed, 7 insertions(+)
 
 diff --git a/msm8998/mm-video-v4l2/vidc/vdec/src/omx_vdec_v4l2.cpp b/msm8998/mm-video-v4l2/vidc/vdec/src/omx_vdec_v4l2.cpp
-index 419d9f5..c8c2c88 100644
+index a24c4c7..c5d7f38 100644
 --- a/msm8998/mm-video-v4l2/vidc/vdec/src/omx_vdec_v4l2.cpp
 +++ b/msm8998/mm-video-v4l2/vidc/vdec/src/omx_vdec_v4l2.cpp
 @@ -1046,6 +1046,7 @@ OMX_ERRORTYPE omx_vdec::decide_dpb_buffer_mode(bool split_opb_dpb_with_same_colo
@@ -59,5 +59,5 @@ index 419d9f5..c8c2c88 100644
          DEBUG_PRINT_HIGH("Failed to set DPB buffer mode: %d", eRet);
      }
 -- 
-2.17.1
+2.23.0
 

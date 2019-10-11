@@ -1,32 +1,38 @@
-From aac701771dd9c4d90f95683f73ef042e80621f68 Mon Sep 17 00:00:00 2001
+From d08dc7421cce45d2deae4b050ad0362c7a1d3664 Mon Sep 17 00:00:00 2001
 From: Humberto Borba <humberos@omnirom.org>
 Date: Sat, 1 Sep 2018 21:24:56 -0300
-Subject: [PATCH 2/2] hardware: nxp: Restore pn547 support
+Subject: [PATCH 2/2] Restore pn547 support
 
-Change-Id: I498367f676f8c8d7fc13e849509d0d8a05ec89a8
+Test: Compile with current AOSP master,
+boot device with PN547C2 chip, read/write NFC tag OK.
+
+Cherry-picked from: I498367f676f8c8d7fc13e849509d0d8a05ec89a8
+
 Signed-off-by: Humberto Borba <humberos@omnirom.org>
+Signed-off-by: Felix <google@ix5.org>
+Change-Id: I226fa084d22850a8610f1d67ef30b96250fbd570
 ---
- extns/impl/Nxp_Features.h          |  12 ++
+ extns/impl/Nxp_Features.h          |  12 +++
  halimpl/dnld/phDnldNfc.cc          |   6 +-
  halimpl/dnld/phNxpNciHal_Dnld.cc   |   2 +-
- halimpl/hal/phNxpNciHal.cc         | 180 ++++++++++++++++-------------
+ halimpl/hal/phNxpNciHal.cc         | 168 ++++++++++++++++-------------
  halimpl/hal/phNxpNciHal.h          |   1 +
  halimpl/hal/phNxpNciHal_ext.cc     |  20 +++-
  halimpl/utils/NxpNfcCapability.cpp |   4 +
- 7 files changed, 139 insertions(+), 86 deletions(-)
+ 7 files changed, 133 insertions(+), 80 deletions(-)
 
 diff --git a/extns/impl/Nxp_Features.h b/extns/impl/Nxp_Features.h
-index 2a1529b..c060794 100755
+index 1a2bf41..45df756 100755
 --- a/extns/impl/Nxp_Features.h
 +++ b/extns/impl/Nxp_Features.h
-@@ -26,6 +26,7 @@
+@@ -25,6 +25,7 @@
+ #define FW_MOBILE_MAJOR_NUMBER_PN81A 0x02
  #define FW_MOBILE_MAJOR_NUMBER_PN551 0x05
  #define FW_MOBILE_MAJOR_NUMBER_PN557 0x01
- #define FW_MOBILE_MAJOR_NUMBER_PN548 0x01
 +#define FW_MOBILE_MAJOR_NUMBER_PN547 0x01
+ #define FW_MOBILE_MAJOR_NUMBER_PN548AD 0x01
   using namespace std;
  typedef enum {
-   unknown,
 @@ -63,6 +64,8 @@ extern tNfc_featureList nfcFL;
        nfcFL.chipType = pn551;                                                \
      } else if (chipType == pn66T) {                                          \
@@ -38,7 +44,7 @@ index 2a1529b..c060794 100755
    }
 @@ -103,6 +106,15 @@ extern tNfc_featureList nfcFL;
        nfcFL._PHDNLDNFC_USERDATA_EEPROM_LEN = 0x0C00U;                       \
-       nfcFL._FW_MOBILE_MAJOR_NUMBER = FW_MOBILE_MAJOR_NUMBER_PN548;         \
+       nfcFL._FW_MOBILE_MAJOR_NUMBER = FW_MOBILE_MAJOR_NUMBER_PN548AD;       \
                                                                              \
 +    } else if (chipType == pn547C2 || chipType == pn65T) {                  \
 +                                                                            \
@@ -53,10 +59,10 @@ index 2a1529b..c060794 100755
    }
  #define STRCPY_FW_LIB(str) {                                                \
 diff --git a/halimpl/dnld/phDnldNfc.cc b/halimpl/dnld/phDnldNfc.cc
-index 44bafd4..bcd143a 100644
+index 36ea2f4..f2a16e5 100644
 --- a/halimpl/dnld/phDnldNfc.cc
 +++ b/halimpl/dnld/phDnldNfc.cc
-@@ -752,7 +752,7 @@ NFCSTATUS phDnldNfc_InitImgInfo(void) {
+@@ -753,7 +753,7 @@ NFCSTATUS phDnldNfc_InitImgInfo(void) {
      wStatus = phDnldNfc_LoadBinFW(&pImageInfo, &ImageInfoLen);
    } else if(fwType == FW_FORMAT_SO) {
      gpphDnldContext->FwFormat = FW_FORMAT_SO;
@@ -65,7 +71,7 @@ index 44bafd4..bcd143a 100644
        wStatus = phDnldNfc_LoadRecoveryFW(&pImageInfo, &ImageInfoLen);
      } else {
        wStatus = phDnldNfc_LoadFW(&pImageInfo, &ImageInfoLen);
-@@ -828,7 +828,7 @@ NFCSTATUS phDnldNfc_LoadRecInfo(void) {
+@@ -829,7 +829,7 @@ NFCSTATUS phDnldNfc_LoadRecInfo(void) {
    /* if memory is not allocated then allocate memory for donwload context
     * structure */
    phDnldNfc_SetHwDevHandle();
@@ -74,7 +80,7 @@ index 44bafd4..bcd143a 100644
      wStatus = phDnldNfc_LoadRecoveryFW(&pImageInfo, &ImageInfoLen);
    else
      wStatus = phDnldNfc_LoadFW(&pImageInfo, &ImageInfoLen);
-@@ -884,7 +884,7 @@ NFCSTATUS phDnldNfc_LoadPKInfo(void) {
+@@ -885,7 +885,7 @@ NFCSTATUS phDnldNfc_LoadPKInfo(void) {
     * structure */
    phDnldNfc_SetHwDevHandle();
    /* load the PKU image library */
@@ -84,10 +90,10 @@ index 44bafd4..bcd143a 100644
    else
      wStatus = phDnldNfc_LoadFW(&pImageInfo, &ImageInfoLen);
 diff --git a/halimpl/dnld/phNxpNciHal_Dnld.cc b/halimpl/dnld/phNxpNciHal_Dnld.cc
-index 6ac1890..a71b8fd 100644
+index 4392128..95411c0 100644
 --- a/halimpl/dnld/phNxpNciHal_Dnld.cc
 +++ b/halimpl/dnld/phNxpNciHal_Dnld.cc
-@@ -1699,7 +1699,7 @@ NFCSTATUS phNxpNciHal_fw_download_seq(uint8_t bClkSrcVal, uint8_t bClkFreqVal) {
+@@ -1700,7 +1700,7 @@ NFCSTATUS phNxpNciHal_fw_download_seq(uint8_t bClkSrcVal, uint8_t bClkFreqVal) {
    /* Get firmware version */
    if (NFCSTATUS_SUCCESS == phDnldNfc_InitImgInfo()) {
      NXPLOG_FWDNLD_D("phDnldNfc_InitImgInfo:SUCCESS");
@@ -97,10 +103,10 @@ index 6ac1890..a71b8fd 100644
            phNxpNciHal_fw_seq_handler(phNxpNciHal_dummy_rec_dwnld_seqhandler);
      } else {
 diff --git a/halimpl/hal/phNxpNciHal.cc b/halimpl/hal/phNxpNciHal.cc
-index 70c9b27..7a7da43 100755
+index 664dc96..9e6efb8 100755
 --- a/halimpl/hal/phNxpNciHal.cc
 +++ b/halimpl/hal/phNxpNciHal.cc
-@@ -456,7 +456,7 @@ static NFCSTATUS phNxpNciHal_CheckValidFwVersion(void) {
+@@ -461,7 +461,7 @@ static NFCSTATUS phNxpNciHal_CheckValidFwVersion(void) {
        }
      }
    }
@@ -109,8 +115,8 @@ index 70c9b27..7a7da43 100755
      status = NFCSTATUS_SUCCESS;
    }
    else if (wFwVerRsp == 0) {
-@@ -822,6 +822,10 @@ int phNxpNciHal_fw_mw_ver_check() {
-              (rom_version == FW_MOBILE_ROM_VERSION_PN548) &&
+@@ -834,6 +834,10 @@ int phNxpNciHal_fw_mw_ver_check() {
+              (rom_version == FW_MOBILE_ROM_VERSION_PN548AD) &&
               (fw_maj_ver == 0x01)) {
      status = NFCSTATUS_SUCCESS;
 +  } else if (((nfcFL.chipType == pn547C2) || (nfcFL.chipType == pn65T)) &&
@@ -120,9 +126,9 @@ index 70c9b27..7a7da43 100755
    }
    return status;
  }
-@@ -1378,54 +1382,58 @@ int phNxpNciHal_core_initialized(uint8_t* p_core_init_rsp_params) {
-     retlen = 0;
-     fw_download_success = 0;
+@@ -1408,40 +1412,42 @@ int phNxpNciHal_core_initialized(uint8_t* p_core_init_rsp_params) {
+       if(num != 0) phNxpNciHal_phase_tirm_offset_sign_update();
+     }
  
 -    NXPLOG_NCIHAL_D("Performing TVDD Settings");
 -    isfound = GetNxpNumValue(NAME_NXP_EXT_TVDD_CFG, &num, sizeof(num));
@@ -136,7 +142,21 @@ index 70c9b27..7a7da43 100755
 -            NXPLOG_NCIHAL_E("EXT TVDD CFG 1 Settings failed");
 -            retry_core_init_cnt++;
 -            goto retry_core_init;
--          }
++    if (nfcFL.chipType != pn547C2) {
++      NXPLOG_NCIHAL_D("Performing TVDD Settings");
++      isfound = GetNxpNumValue(NAME_NXP_EXT_TVDD_CFG, &num, sizeof(num));
++      if (isfound > 0) {
++        if (num == 1) {
++          isfound = GetNxpByteArrayValue(NAME_NXP_EXT_TVDD_CFG_1, (char*)buffer,
++                                         bufflen, &retlen);
++          if (retlen > 0) {
++            status = phNxpNciHal_send_ext_cmd(retlen, buffer);
++            if (status != NFCSTATUS_SUCCESS) {
++              NXPLOG_NCIHAL_E("EXT TVDD CFG 1 Settings failed");
++              retry_core_init_cnt++;
++              goto retry_core_init;
++            }
+           }
 -        }
 -      } else if (num == 2) {
 -        isfound = GetNxpByteArrayValue(NAME_NXP_EXT_TVDD_CFG_2, (char*)buffer,
@@ -147,7 +167,17 @@ index 70c9b27..7a7da43 100755
 -            NXPLOG_NCIHAL_E("EXT TVDD CFG 2 Settings failed");
 -            retry_core_init_cnt++;
 -            goto retry_core_init;
--          }
++        } else if (num == 2) {
++          isfound = GetNxpByteArrayValue(NAME_NXP_EXT_TVDD_CFG_2, (char*)buffer,
++                                         bufflen, &retlen);
++          if (retlen > 0) {
++            status = phNxpNciHal_send_ext_cmd(retlen, buffer);
++            if (status != NFCSTATUS_SUCCESS) {
++              NXPLOG_NCIHAL_E("EXT TVDD CFG 2 Settings failed");
++              retry_core_init_cnt++;
++              goto retry_core_init;
++            }
+           }
 -        }
 -      } else if (num == 3) {
 -        isfound = GetNxpByteArrayValue(NAME_NXP_EXT_TVDD_CFG_3, (char*)buffer,
@@ -158,51 +188,21 @@ index 70c9b27..7a7da43 100755
 -            NXPLOG_NCIHAL_E("EXT TVDD CFG 3 Settings failed");
 -            retry_core_init_cnt++;
 -            goto retry_core_init;
-+    if (nfcFL.chipType != pn547C2) {
-+        NXPLOG_NCIHAL_D("Performing TVDD Settings");
-+        isfound = GetNxpNumValue(NAME_NXP_EXT_TVDD_CFG, &num, sizeof(num));
-+        if (isfound > 0){
-+          if (num == 1) {
-+            isfound = GetNxpByteArrayValue(NAME_NXP_EXT_TVDD_CFG_1, (char*)buffer,
-+                                           bufflen, &retlen);
-+            if (retlen > 0) {
-+              status = phNxpNciHal_send_ext_cmd(retlen, buffer);
-+              if (status != NFCSTATUS_SUCCESS) {
-+                NXPLOG_NCIHAL_E("EXT TVDD CFG 1 Settings failed");
-+                retry_core_init_cnt++;
-+                goto retry_core_init;
-+              }
++        } else if (num == 3) {
++          isfound = GetNxpByteArrayValue(NAME_NXP_EXT_TVDD_CFG_3, (char*)buffer,
++                                         bufflen, &retlen);
++          if (retlen > 0) {
++            status = phNxpNciHal_send_ext_cmd(retlen, buffer);
++            if (status != NFCSTATUS_SUCCESS) {
++              NXPLOG_NCIHAL_E("EXT TVDD CFG 3 Settings failed");
++              retry_core_init_cnt++;
++              goto retry_core_init;
 +            }
-+          } else if (num == 2) {
-+            isfound = GetNxpByteArrayValue(NAME_NXP_EXT_TVDD_CFG_2, (char*)buffer,
-+                                           bufflen, &retlen);
-+            if (retlen > 0) {
-+              status = phNxpNciHal_send_ext_cmd(retlen, buffer);
-+              if (status != NFCSTATUS_SUCCESS) {
-+                NXPLOG_NCIHAL_E("EXT TVDD CFG 2 Settings failed");
-+                retry_core_init_cnt++;
-+                goto retry_core_init;
-+              }
-+            }
-+          } else if (num == 3) {
-+            isfound = GetNxpByteArrayValue(NAME_NXP_EXT_TVDD_CFG_3, (char*)buffer,
-+                                           bufflen, &retlen);
-+            if (retlen > 0) {
-+              status = phNxpNciHal_send_ext_cmd(retlen, buffer);
-+              if (status != NFCSTATUS_SUCCESS) {
-+                NXPLOG_NCIHAL_E("EXT TVDD CFG 3 Settings failed");
-+                retry_core_init_cnt++;
-+                goto retry_core_init;
-+              }
-+            }
-+          } else {
-+            NXPLOG_NCIHAL_E("Wrong Configuration Value %ld", num);
            }
--        }
--      } else {
--        NXPLOG_NCIHAL_E("Wrong Configuration Value %ld", num);
--      }
-+       }
+         }
+       } else {
+@@ -1449,13 +1455,15 @@ int phNxpNciHal_core_initialized(uint8_t* p_core_init_rsp_params) {
+       }
      }
      retlen = 0;
 -    config_access = false;
@@ -219,7 +219,7 @@ index 70c9b27..7a7da43 100755
          status = phNxpNciHal_CheckRFCmdRespStatus();
          /*STATUS INVALID PARAM 0x09*/
          if (status == 0x09) {
-@@ -1447,7 +1455,7 @@ int phNxpNciHal_core_initialized(uint8_t* p_core_init_rsp_params) {
+@@ -1477,7 +1485,7 @@ int phNxpNciHal_core_initialized(uint8_t* p_core_init_rsp_params) {
                                     bufflen, &retlen);
      if (retlen > 0) {
        status = phNxpNciHal_send_ext_cmd(retlen, buffer);
@@ -228,7 +228,7 @@ index 70c9b27..7a7da43 100755
          status = phNxpNciHal_CheckRFCmdRespStatus();
          /*STATUS INVALID PARAM 0x09*/
          if (status == 0x09) {
-@@ -1469,7 +1477,7 @@ int phNxpNciHal_core_initialized(uint8_t* p_core_init_rsp_params) {
+@@ -1499,7 +1507,7 @@ int phNxpNciHal_core_initialized(uint8_t* p_core_init_rsp_params) {
                                     bufflen, &retlen);
      if (retlen > 0) {
        status = phNxpNciHal_send_ext_cmd(retlen, buffer);
@@ -237,7 +237,7 @@ index 70c9b27..7a7da43 100755
          status = phNxpNciHal_CheckRFCmdRespStatus();
          /*STATUS INVALID PARAM 0x09*/
          if (status == 0x09) {
-@@ -1491,7 +1499,7 @@ int phNxpNciHal_core_initialized(uint8_t* p_core_init_rsp_params) {
+@@ -1521,7 +1529,7 @@ int phNxpNciHal_core_initialized(uint8_t* p_core_init_rsp_params) {
                                     bufflen, &retlen);
      if (retlen > 0) {
        status = phNxpNciHal_send_ext_cmd(retlen, buffer);
@@ -246,7 +246,7 @@ index 70c9b27..7a7da43 100755
          status = phNxpNciHal_CheckRFCmdRespStatus();
          /*STATUS INVALID PARAM 0x09*/
          if (status == 0x09) {
-@@ -1513,7 +1521,7 @@ int phNxpNciHal_core_initialized(uint8_t* p_core_init_rsp_params) {
+@@ -1543,7 +1551,7 @@ int phNxpNciHal_core_initialized(uint8_t* p_core_init_rsp_params) {
                                     bufflen, &retlen);
      if (retlen > 0) {
        status = phNxpNciHal_send_ext_cmd(retlen, buffer);
@@ -255,7 +255,7 @@ index 70c9b27..7a7da43 100755
          status = phNxpNciHal_CheckRFCmdRespStatus();
          /*STATUS INVALID PARAM 0x09*/
          if (status == 0x09) {
-@@ -1535,7 +1543,7 @@ int phNxpNciHal_core_initialized(uint8_t* p_core_init_rsp_params) {
+@@ -1565,7 +1573,7 @@ int phNxpNciHal_core_initialized(uint8_t* p_core_init_rsp_params) {
                                     bufflen, &retlen);
      if (retlen > 0) {
        status = phNxpNciHal_send_ext_cmd(retlen, buffer);
@@ -264,7 +264,7 @@ index 70c9b27..7a7da43 100755
          status = phNxpNciHal_CheckRFCmdRespStatus();
          /*STATUS INVALID PARAM 0x09*/
          if (status == 0x09) {
-@@ -1551,7 +1559,9 @@ int phNxpNciHal_core_initialized(uint8_t* p_core_init_rsp_params) {
+@@ -1581,7 +1589,9 @@ int phNxpNciHal_core_initialized(uint8_t* p_core_init_rsp_params) {
        }
      }
      retlen = 0;
@@ -275,7 +275,7 @@ index 70c9b27..7a7da43 100755
      NXPLOG_NCIHAL_D("Performing NAME_NXP_CORE_CONF_EXTN Settings");
      isfound = GetNxpByteArrayValue(NAME_NXP_CORE_CONF_EXTN, (char*)buffer,
                                     bufflen, &retlen);
-@@ -1579,13 +1589,15 @@ int phNxpNciHal_core_initialized(uint8_t* p_core_init_rsp_params) {
+@@ -1609,13 +1619,15 @@ int phNxpNciHal_core_initialized(uint8_t* p_core_init_rsp_params) {
      }
  
      retlen = 0;
@@ -293,7 +293,7 @@ index 70c9b27..7a7da43 100755
          status = phNxpNciHal_CheckRFCmdRespStatus();
          /*STATUS INVALID PARAM 0x09*/
          if (status == 0x09) {
-@@ -1600,42 +1612,46 @@ int phNxpNciHal_core_initialized(uint8_t* p_core_init_rsp_params) {
+@@ -1630,42 +1642,46 @@ int phNxpNciHal_core_initialized(uint8_t* p_core_init_rsp_params) {
          goto retry_core_init;
        }
      }
@@ -370,7 +370,7 @@ index 70c9b27..7a7da43 100755
      }
      // Update eeprom value
      status = phNxpNciHal_set_mw_eeprom();
-@@ -1853,8 +1869,10 @@ int phNxpNciHal_core_initialized(uint8_t* p_core_init_rsp_params) {
+@@ -1883,8 +1899,10 @@ int phNxpNciHal_core_initialized(uint8_t* p_core_init_rsp_params) {
      buffer = NULL;
    }
    // initialize dummy FW recovery variables
@@ -384,22 +384,22 @@ index 70c9b27..7a7da43 100755
      phNxpNciHal_core_initialized_complete(status);
    else {
 diff --git a/halimpl/hal/phNxpNciHal.h b/halimpl/hal/phNxpNciHal.h
-index 7389f2c..776fa24 100755
+index 79791f9..55ef903 100755
 --- a/halimpl/hal/phNxpNciHal.h
 +++ b/halimpl/hal/phNxpNciHal.h
-@@ -37,6 +37,7 @@ typedef void(phNxpNciHal_control_granted_callback_t)();
- #define FW_MOBILE_ROM_VERSION_PN553 0x11
- #define FW_MOBILE_ROM_VERSION_PN557 0x12
- #define FW_MOBILE_ROM_VERSION_PN548 0x10
-+#define FW_MOBILE_ROM_VERSION_PN547 0x08
- /* NCI Data */
+@@ -33,6 +33,7 @@
+ typedef void(phNxpNciHal_control_granted_callback_t)();
  
- #define NCI_MT_CMD 0x20
+ /*ROM CODE VERSION FW*/
++#define FW_MOBILE_ROM_VERSION_PN547 0x08
+ #define FW_MOBILE_ROM_VERSION_PN548AD 0x10
+ #define FW_MOBILE_ROM_VERSION_PN551 0x10
+ #define FW_MOBILE_ROM_VERSION_PN553 0x11
 diff --git a/halimpl/hal/phNxpNciHal_ext.cc b/halimpl/hal/phNxpNciHal_ext.cc
-index 85c4d9c..f04fdc7 100755
+index d75b6b4..e8f8d56 100755
 --- a/halimpl/hal/phNxpNciHal_ext.cc
 +++ b/halimpl/hal/phNxpNciHal_ext.cc
-@@ -98,6 +98,7 @@ void phNxpNciHal_ext_init(void) {
+@@ -93,6 +93,7 @@ void phNxpNciHal_ext_init(void) {
  *******************************************************************************/
  NFCSTATUS phNxpNciHal_process_ext_rsp(uint8_t* p_ntf, uint16_t* p_len) {
    NFCSTATUS status = NFCSTATUS_SUCCESS;
@@ -407,7 +407,7 @@ index 85c4d9c..f04fdc7 100755
  
    if (p_ntf[0] == 0x61 && p_ntf[1] == 0x05 && *p_len < 14) {
      if(*p_len <= 6) {
-@@ -200,6 +201,7 @@ NFCSTATUS phNxpNciHal_process_ext_rsp(uint8_t* p_ntf, uint16_t* p_len) {
+@@ -192,6 +193,7 @@ NFCSTATUS phNxpNciHal_process_ext_rsp(uint8_t* p_ntf, uint16_t* p_len) {
        case 0x80:
          NXPLOG_NCIHAL_D("NxpNci: Protocol = MIFARE");
          break;
@@ -415,7 +415,7 @@ index 85c4d9c..f04fdc7 100755
        case 0x81:
          NXPLOG_NCIHAL_D("NxpNci: Protocol = Kovio");
          break;
-@@ -227,6 +229,7 @@ NFCSTATUS phNxpNciHal_process_ext_rsp(uint8_t* p_ntf, uint16_t* p_len) {
+@@ -219,6 +221,7 @@ NFCSTATUS phNxpNciHal_process_ext_rsp(uint8_t* p_ntf, uint16_t* p_len) {
        case 0x06:
          NXPLOG_NCIHAL_D("NxpNci: Mode = 15693 Passive Poll");
          break;
@@ -423,7 +423,7 @@ index 85c4d9c..f04fdc7 100755
        case 0x70:
          NXPLOG_NCIHAL_D("NxpNci: Mode = Kovio");
          break;
-@@ -320,6 +323,15 @@ NFCSTATUS phNxpNciHal_process_ext_rsp(uint8_t* p_ntf, uint16_t* p_len) {
+@@ -312,6 +315,15 @@ NFCSTATUS phNxpNciHal_process_ext_rsp(uint8_t* p_ntf, uint16_t* p_len) {
    } else if (p_ntf[0] == 0x41 && p_ntf[1] == 0x04 && cleanup_timer != 0) {
      status = NFCSTATUS_FAILED;
      return status;
@@ -475,5 +475,5 @@ index 720ed08..51752ca 100644
          case 0x58:  // NQ220
            chipType = pn66T;
 -- 
-2.17.1
+2.23.0
 

@@ -1,7 +1,7 @@
-From bc9c399ee4921cb3812a075f2068e9d95063978f Mon Sep 17 00:00:00 2001
+From c123b24e736c7242610891cdff6b0b15a6ee161a Mon Sep 17 00:00:00 2001
 From: oshmoun <oshmoun100@googlemail.com>
 Date: Mon, 29 Oct 2018 10:31:15 +0100
-Subject: [PATCH 6/6] gps: sdm845: gnss: use correct format specifier in log
+Subject: [PATCH 5/5] gps: sdm845: gnss: use correct format specifier in log
 
 LOC_API_ADAPTER_EVENT_MASK_T was changed from 'unsigned int' to 'uint64_t'.
 correct the format specifier used to print LOC_API_ADAPTER_EVENT_MASK_T to avoid breaking compilation of libgnss.
@@ -13,10 +13,10 @@ Change-Id: I24ad0342d6d26f1c7fe2fcac451a71bbfba8bfe0
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/sdm845/gnss/GnssAdapter.cpp b/sdm845/gnss/GnssAdapter.cpp
-index 833f996..22aa6a0 100644
+index edecb88..b6a49e5 100644
 --- a/sdm845/gnss/GnssAdapter.cpp
 +++ b/sdm845/gnss/GnssAdapter.cpp
-@@ -1722,7 +1722,7 @@ GnssAdapter::updateClientsEventMask()
+@@ -1774,7 +1774,7 @@ GnssAdapter::updateClientsEventMask()
          mask |= LOC_API_ADAPTER_BIT_GNSS_MEASUREMENT;
          mask |= LOC_API_ADAPTER_BIT_GNSS_SV_POLYNOMIAL_REPORT;
  
@@ -26,5 +26,5 @@ index 833f996..22aa6a0 100644
  
      if (mAgpsCbInfo.statusV4Cb != NULL) {
 -- 
-2.17.1
+2.23.0
 

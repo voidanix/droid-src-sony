@@ -1,4 +1,4 @@
-From a7fc1501cdb50de913b458013d081f6443bb6112 Mon Sep 17 00:00:00 2001
+From d76747ea426242abb622cd3a1b61c2dd26a37da8 Mon Sep 17 00:00:00 2001
 From: Alin Jerpelea <alin.jerpelea@sony.com>
 Date: Wed, 21 Nov 2018 05:56:08 +0100
 Subject: [PATCH 2/2] guard use of kernel sources
@@ -111,5 +111,5 @@ index b271f9d9..7d060a11 100644
  # ---------------------------------------------------------------------------------
  # 			Make the Shared library (libOmxVenc)
 -- 
-2.17.1
+2.23.0
 

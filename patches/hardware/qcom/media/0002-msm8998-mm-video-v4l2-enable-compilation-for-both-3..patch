@@ -1,4 +1,4 @@
-From 1d09448711f2848efee94d828f22739eb995fd87 Mon Sep 17 00:00:00 2001
+From 5d85d269271e60e535e7679fb084cb34cb04fe26 Mon Sep 17 00:00:00 2001
 From: Paras Nagda <pnagda@codeaurora.org>
 Date: Thu, 19 Apr 2018 20:05:35 +0530
 Subject: [PATCH 2/3] msm8998: mm-video-v4l2: enable compilation for both 3.18
@@ -94,7 +94,7 @@ index dd1af29..439344e 100644
  {
      public:
 diff --git a/msm8998/mm-video-v4l2/vidc/vdec/Android.mk b/msm8998/mm-video-v4l2/vidc/vdec/Android.mk
-index 250350e..c101646 100644
+index 4c44fc8..0545516 100644
 --- a/msm8998/mm-video-v4l2/vidc/vdec/Android.mk
 +++ b/msm8998/mm-video-v4l2/vidc/vdec/Android.mk
 @@ -25,6 +25,9 @@ libmm-vdec-def += -D_MSM8974_
@@ -437,7 +437,7 @@ index c0660fd..59958d5 100644
  #endif // _MSM8974_
  
 diff --git a/msm8998/mm-video-v4l2/vidc/vdec/src/omx_vdec_v4l2.cpp b/msm8998/mm-video-v4l2/vidc/vdec/src/omx_vdec_v4l2.cpp
-index c8c2c88..4c85bcc 100644
+index c5d7f38..b056577 100644
 --- a/msm8998/mm-video-v4l2/vidc/vdec/src/omx_vdec_v4l2.cpp
 +++ b/msm8998/mm-video-v4l2/vidc/vdec/src/omx_vdec_v4l2.cpp
 @@ -3330,13 +3330,21 @@ bool omx_vdec::execute_omx_flush(OMX_U32 flushType)
@@ -516,7 +516,7 @@ index c8c2c88..4c85bcc 100644
                                          eRet = OMX_ErrorBadParameter;
  
 diff --git a/msm8998/mm-video-v4l2/vidc/venc/Android.mk b/msm8998/mm-video-v4l2/vidc/venc/Android.mk
-index a66593b..3f3a219 100644
+index 4080333..491c20c 100644
 --- a/msm8998/mm-video-v4l2/vidc/venc/Android.mk
 +++ b/msm8998/mm-video-v4l2/vidc/venc/Android.mk
 @@ -41,6 +41,10 @@ libmm-venc-def += -DMAX_RES_1080P_EBI
@@ -687,7 +687,7 @@ index 7ea8fd7..61ea142 100644
      char data[sizeof(LEGACY_CAM_METADATA_TYPE) + sizeof(int)];
  } encoder_meta_buffer_payload_type;
 diff --git a/msm8998/mm-video-v4l2/vidc/venc/src/omx_video_base.cpp b/msm8998/mm-video-v4l2/vidc/venc/src/omx_video_base.cpp
-index ae640a7..9cc076d 100644
+index d1c8d97..59210cf 100644
 --- a/msm8998/mm-video-v4l2/vidc/venc/src/omx_video_base.cpp
 +++ b/msm8998/mm-video-v4l2/vidc/venc/src/omx_video_base.cpp
 @@ -1898,8 +1898,13 @@ OMX_ERRORTYPE  omx_video::get_parameter(OMX_IN OMX_HANDLETYPE     hComp,
@@ -768,5 +768,5 @@ index 0bdd914..c5fceb8 100644
  
      if (ioctl(m_nDriver_fd, VIDIOC_ENCODER_CMD, &enc)) {
 -- 
-2.17.1
+2.23.0
 
