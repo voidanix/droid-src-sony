@@ -1,4 +1,4 @@
-From 212dbf2f42aaa917a1b966f688488eaaea5ae36f Mon Sep 17 00:00:00 2001
+From e409c3e19cff8b54f99921305879ef383eed6cbc Mon Sep 17 00:00:00 2001
 From: Felix <google@ix5.org>
 Date: Sun, 26 May 2019 12:09:50 +0200
 Subject: [PATCH] fs_config: Fix cases without vendor/oem partition

@@ -1,7 +1,7 @@
-From de80eb0518a0a6bb25573e38ca2ffa8e009e9d31 Mon Sep 17 00:00:00 2001
+From 2b2063794b407e0d45acd6ee2f48361b24ce30ec Mon Sep 17 00:00:00 2001
 From: Sangho Yoon <sangho.yoon@lge.com>
 Date: Thu, 9 Aug 2018 14:32:27 +0200
-Subject: [PATCH 2/3] Fix bug Device that can't support adoptable storage
+Subject: [PATCH 2/4] Fix bug Device that can't support adoptable storage
  cannot read the sdcard.
 
 Only Primary storag and adoptable storage can get visible flag.

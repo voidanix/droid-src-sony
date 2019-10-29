@@ -1,4 +1,4 @@
-From d76747ea426242abb622cd3a1b61c2dd26a37da8 Mon Sep 17 00:00:00 2001
+From da555ae57d07c7ae8707b3e83b8ec216ee3746ec Mon Sep 17 00:00:00 2001
 From: Alin Jerpelea <alin.jerpelea@sony.com>
 Date: Wed, 21 Nov 2018 05:56:08 +0100
 Subject: [PATCH 2/2] guard use of kernel sources

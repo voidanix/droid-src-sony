@@ -1,4 +1,4 @@
-From 42c6d912fd28e42fcf7046aac3f71bd424662265 Mon Sep 17 00:00:00 2001
+From bf8cc6d8afda173d5f4009ea743a4c10e8e59346 Mon Sep 17 00:00:00 2001
 From: MarijnS95 <marijns95@gmail.com>
 Date: Mon, 9 Sep 2019 15:50:43 +0200
 Subject: [PATCH] verity: Do not increment data when it is nullptr.

@@ -1,7 +1,7 @@
-From 89d40ad8421c03f11ab066c64cfd54a48d4c3672 Mon Sep 17 00:00:00 2001
+From 564354a7289d2c8a9eb481922459609b7c6ae291 Mon Sep 17 00:00:00 2001
 From: Christian Oder <myself5@carbonrom.org>
 Date: Thu, 9 Aug 2018 14:27:35 +0200
-Subject: [PATCH 1/3] fwb: Add check for odm version
+Subject: [PATCH 1/4] fwb: Add check for odm version
 
 We update system more often than ODM. This allows linking the ODM image version to system.
 

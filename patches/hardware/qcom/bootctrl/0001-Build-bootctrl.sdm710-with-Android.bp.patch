@@ -1,4 +1,4 @@
-From 2035a140d53e499be2db51f768d6157211186164 Mon Sep 17 00:00:00 2001
+From 41d0c418826e70242172a4fd1497eb47fd34cc4a Mon Sep 17 00:00:00 2001
 From: Tao Bao <tbao@google.com>
 Date: Mon, 20 May 2019 23:03:14 -0700
 Subject: [PATCH 1/4] Build bootctrl.sdm710 with Android.bp.

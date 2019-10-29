@@ -1,4 +1,4 @@
-From 27d7606b8be98d12dc416852331ba0b4d4506731 Mon Sep 17 00:00:00 2001
+From 061f2b95c4085bb0ccc86769d1afe4e2f7dacbcd Mon Sep 17 00:00:00 2001
 From: Rashed Abdel-Tawab <rashed@linux.com>
 Date: Mon, 10 Jun 2019 16:33:45 +0200
 Subject: [PATCH 1/2] Restore pn548 support to 1.1 HAL

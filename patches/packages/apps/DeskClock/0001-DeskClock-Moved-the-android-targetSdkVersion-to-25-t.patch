@@ -1,4 +1,4 @@
-From c9193bd8795d289d203ce6d71c7e4e3a55ed08fc Mon Sep 17 00:00:00 2001
+From 2cceb516ba876ac8084c26eeac0d4282b75af763 Mon Sep 17 00:00:00 2001
 From: Raman Tenneti <rtenneti@google.com>
 Date: Thu, 20 Jun 2019 16:06:57 -0700
 Subject: [PATCH] DeskClock - Moved the android:targetSdkVersion to 25 to fix

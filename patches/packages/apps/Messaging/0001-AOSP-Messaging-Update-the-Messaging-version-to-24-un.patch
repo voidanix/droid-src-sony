@@ -1,4 +1,4 @@
-From 5ee7d41f9e477abbad8c0a53f214e3f089ec8761 Mon Sep 17 00:00:00 2001
+From d4f502e673bdb87a57e4888fe747f77a29cd1931 Mon Sep 17 00:00:00 2001
 From: Raman Tenneti <rtenneti@google.com>
 Date: Fri, 5 Apr 2019 19:04:14 -0700
 Subject: [PATCH] AOSP/Messaging - Update the Messaging version to 24 until

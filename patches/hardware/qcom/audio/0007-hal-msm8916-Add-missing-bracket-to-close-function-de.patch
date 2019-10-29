@@ -1,4 +1,4 @@
-From e0fa500d8547379addf1d8df5d724be75010701f Mon Sep 17 00:00:00 2001
+From 5159b460bf8a2774d19a23ad253c62455ea52929 Mon Sep 17 00:00:00 2001
 From: MarijnS95 <marijns95@gmail.com>
 Date: Wed, 4 Sep 2019 15:04:44 +0200
 Subject: [PATCH 7/7] hal: msm8916: Add missing bracket to close function

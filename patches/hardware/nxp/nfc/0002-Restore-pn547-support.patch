@@ -1,4 +1,4 @@
-From d08dc7421cce45d2deae4b050ad0362c7a1d3664 Mon Sep 17 00:00:00 2001
+From 7c931d58d91ad71a4902fe191bd4119288138160 Mon Sep 17 00:00:00 2001
 From: Humberto Borba <humberos@omnirom.org>
 Date: Sat, 1 Sep 2018 21:24:56 -0300
 Subject: [PATCH 2/2] Restore pn547 support

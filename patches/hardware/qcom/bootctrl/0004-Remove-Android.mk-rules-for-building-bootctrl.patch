@@ -1,4 +1,4 @@
-From 9b19b920353f97354d6f533f7d6bc4332decdb21 Mon Sep 17 00:00:00 2001
+From 1086e1ed8597a0c2cb3968c1a9e08bb33dcae085 Mon Sep 17 00:00:00 2001
 From: Tao Bao <tbao@google.com>
 Date: Tue, 28 May 2019 14:49:41 -0700
 Subject: [PATCH 4/4] Remove Android.mk rules for building bootctrl.

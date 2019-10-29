@@ -1,4 +1,4 @@
-From 40be80f8f6152715b5aaa538ad1119819c1e25ec Mon Sep 17 00:00:00 2001
+From eef8e65b13333416f9eea0a33f7686f737e07b75 Mon Sep 17 00:00:00 2001
 From: Tao Bao <tbao@google.com>
 Date: Fri, 10 May 2019 09:39:32 -0700
 Subject: [PATCH 3/4] Build bootctrl.msm8996 with Android.bp.

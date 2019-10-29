@@ -1,4 +1,4 @@
-From c123b24e736c7242610891cdff6b0b15a6ee161a Mon Sep 17 00:00:00 2001
+From 5b66db84416ae51696d6154c1c8b1c8ae6adbd89 Mon Sep 17 00:00:00 2001
 From: oshmoun <oshmoun100@googlemail.com>
 Date: Mon, 29 Oct 2018 10:31:15 +0100
 Subject: [PATCH 5/5] gps: sdm845: gnss: use correct format specifier in log

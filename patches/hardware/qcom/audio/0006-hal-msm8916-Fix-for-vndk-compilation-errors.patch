@@ -1,4 +1,4 @@
-From c64a9a4a4fe56b253514de28b946b3fb48769caa Mon Sep 17 00:00:00 2001
+From d35dfef2c0194e8016f4312e203275dd6ccc6f9a Mon Sep 17 00:00:00 2001
 From: Ramjee Singh <ramjee@codeaurora.org>
 Date: Wed, 6 Jun 2018 15:22:02 +0530
 Subject: [PATCH 6/7] hal: msm8916: Fix for vndk compilation errors

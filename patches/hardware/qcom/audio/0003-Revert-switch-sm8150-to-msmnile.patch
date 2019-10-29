@@ -1,6 +1,6 @@
-From 24211191261c311a68d28257bdd1323373e72b8d Mon Sep 17 00:00:00 2001
+From e8882617ca683c8bab9ad125e054ba8d3ee98745 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Bj=C3=B6rn=20Bidar?= <theodorstormgrade@gmail.com>
-Date: Fri, 11 Oct 2019 01:54:01 +0200
+Date: Tue, 29 Oct 2019 15:26:18 +0100
 Subject: [PATCH 3/7] Revert "switch sm8150 to msmnile"
 
 This reverts commit 8e9b92d2c87e9d1cd96ef153853287cb79d5934c.

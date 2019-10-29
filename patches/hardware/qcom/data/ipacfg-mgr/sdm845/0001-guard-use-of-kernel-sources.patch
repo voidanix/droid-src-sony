@@ -1,4 +1,4 @@
-From 9dbfba1b45c5a564d376f22b1809051766f8aa5a Mon Sep 17 00:00:00 2001
+From 28e4758ecd07ccd7f9cdb11db89b7c01de7cbc23 Mon Sep 17 00:00:00 2001
 From: Alin Jerpelea <alin.jerpelea@sony.com>
 Date: Thu, 22 Nov 2018 03:06:11 +0100
 Subject: [PATCH] guard use of kernel sources
@@ -15,7 +15,7 @@ Signed-off-by: Alin Jerpelea <alin.jerpelea@sony.com>
  3 files changed, 7 insertions(+)
 
 diff --git a/ipacm/src/Android.mk b/ipacm/src/Android.mk
-index cff0960..c6196a2 100644
+index e7f5d21..5a6fef8 100644
 --- a/ipacm/src/Android.mk
 +++ b/ipacm/src/Android.mk
 @@ -14,8 +14,10 @@ include $(CLEAR_VARS)

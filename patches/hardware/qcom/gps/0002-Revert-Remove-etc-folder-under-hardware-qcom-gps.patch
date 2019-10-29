@@ -1,6 +1,6 @@
-From 216df355577e3de248895bcb68c4b9595b157b1d Mon Sep 17 00:00:00 2001
+From 7637c37e8f29e1ffc7b81741cdc57e09c0c94b9d Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Bj=C3=B6rn=20Bidar?= <theodorstormgrade@gmail.com>
-Date: Fri, 11 Oct 2019 01:54:01 +0200
+Date: Tue, 29 Oct 2019 15:26:18 +0100
 Subject: [PATCH 2/5] Revert "Remove etc folder under hardware/qcom/gps"
 
 This reverts commit 484979c524067125b56d59afb102003ff48e3702.

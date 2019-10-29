@@ -1,4 +1,4 @@
-From 873bb139ba85e9d320e9729fbfb114ffc4a0ff7d Mon Sep 17 00:00:00 2001
+From ac7d548e20453e2ef0fde119c08045c68f6ec4c9 Mon Sep 17 00:00:00 2001
 From: Vikas Reddy Pachika <vpachi@codeaurora.org>
 Date: Wed, 21 Dec 2016 15:55:43 +0530
 Subject: [PATCH 3/3] msm8998: mm-video-v4l2: Renaming the AU-Delimiter

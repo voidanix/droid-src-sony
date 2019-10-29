@@ -1,6 +1,6 @@
-From 0975543d4ff4b5304901c8737dc2dba23a0de872 Mon Sep 17 00:00:00 2001
+From 1c18fdee268dd3bb682c54015578f60cbe976a27 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Bj=C3=B6rn=20Bidar?= <theodorstormgrade@gmail.com>
-Date: Fri, 11 Oct 2019 01:54:01 +0200
+Date: Tue, 29 Oct 2019 15:26:18 +0100
 Subject: [PATCH 1/7] Revert "hal: Correct mixer control name for 3.5mm
  headphone"
 

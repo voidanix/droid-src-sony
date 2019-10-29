@@ -1,6 +1,6 @@
-From b3a54261950abb1bdc26e641024953b3b22c8ff0 Mon Sep 17 00:00:00 2001
+From dfdb5d203e977bab38ffac0de032c6218317591e Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Bj=C3=B6rn=20Bidar?= <theodorstormgrade@gmail.com>
-Date: Fri, 11 Oct 2019 01:54:01 +0200
+Date: Tue, 29 Oct 2019 15:26:18 +0100
 Subject: [PATCH 2/7] Revert "Switch msmnile to new Audio HAL"
 
 This reverts commit d0d5c9135fed70a25a42f09f0e32b056bc7b15a8.

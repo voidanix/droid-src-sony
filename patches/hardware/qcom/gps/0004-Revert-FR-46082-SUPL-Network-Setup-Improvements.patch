@@ -1,6 +1,6 @@
-From 35dc0b67388b1e3a156f35f59f88825e3251a5fb Mon Sep 17 00:00:00 2001
+From b5ff27bcb82fb76506ceacb62ffecaadbdc20a9d Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Bj=C3=B6rn=20Bidar?= <theodorstormgrade@gmail.com>
-Date: Fri, 11 Oct 2019 01:54:01 +0200
+Date: Tue, 29 Oct 2019 15:26:18 +0100
 Subject: [PATCH 4/5] Revert "FR 46082 - SUPL Network Setup Improvements"
 
 This reverts commit 35a95e0a9bc9aeab1bb1847180babda2da5fbf90.

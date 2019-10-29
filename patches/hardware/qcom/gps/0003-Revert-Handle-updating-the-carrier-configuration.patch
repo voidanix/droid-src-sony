@@ -1,6 +1,6 @@
-From decab33438c8ef0517ab484933f3c05216d4b3d8 Mon Sep 17 00:00:00 2001
+From a74086f9118c0fdbc7b41ea0491c1da4b14ad33c Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Bj=C3=B6rn=20Bidar?= <theodorstormgrade@gmail.com>
-Date: Fri, 11 Oct 2019 01:54:01 +0200
+Date: Tue, 29 Oct 2019 15:26:18 +0100
 Subject: [PATCH 3/5] Revert "Handle updating the carrier configuration"
 
 This reverts commit f475797d3c031ae97a393fa3e899034836fe7ba6.
