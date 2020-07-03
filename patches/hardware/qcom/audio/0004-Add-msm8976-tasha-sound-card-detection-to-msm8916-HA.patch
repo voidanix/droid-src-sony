@@ -1,4 +1,4 @@
-From f7997f09dd3030bdfe73a7d14bb3e6f0f03d1489 Mon Sep 17 00:00:00 2001
+From c86a2ce33b6b3478df02b05133a2ed102aa86813 Mon Sep 17 00:00:00 2001
 From: Adam Farden <adam@farden.cz>
 Date: Thu, 9 Aug 2018 09:26:47 +0200
 Subject: [PATCH 4/7] Add msm8976 tasha sound card detection to msm8916 HAL
@@ -69,5 +69,5 @@ index 9c658a3..c800d8f 100644
  include $(CLEAR_VARS)
  
 -- 
-2.23.0
+2.27.0
 

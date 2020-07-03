@@ -1,4 +1,4 @@
-From ad0aff0292cd198b2cc03b305bb49626035d6b57 Mon Sep 17 00:00:00 2001
+From 84e5930d1dfc9697a8bfadfe64796e9dd68956cb Mon Sep 17 00:00:00 2001
 From: Tao Bao <tbao@google.com>
 Date: Wed, 15 May 2019 10:00:47 -0700
 Subject: [PATCH 2/4] Revert^2 "Build bootctrl.msm8998 with Android.bp.""
@@ -26,5 +26,5 @@ index 6029054..4b94b7a 100644
  endif
  
 -- 
-2.23.0
+2.27.0
 

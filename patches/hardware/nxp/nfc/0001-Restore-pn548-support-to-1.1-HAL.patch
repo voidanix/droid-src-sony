@@ -1,4 +1,4 @@
-From 061f2b95c4085bb0ccc86769d1afe4e2f7dacbcd Mon Sep 17 00:00:00 2001
+From a4987cde4cd26e212d3bc78f63a85afdbfc4a138 Mon Sep 17 00:00:00 2001
 From: Rashed Abdel-Tawab <rashed@linux.com>
 Date: Mon, 10 Jun 2019 16:33:45 +0200
 Subject: [PATCH 1/2] Restore pn548 support to 1.1 HAL
@@ -227,7 +227,7 @@ index 5e59dce..79791f9 100755
  **
  ** Function         phNxpNciHal_configFeatureList
 diff --git a/halimpl/hal/phNxpNciHal_ext.cc b/halimpl/hal/phNxpNciHal_ext.cc
-index 7908141..d75b6b4 100755
+index f9b92f8..d1267d2 100755
 --- a/halimpl/hal/phNxpNciHal_ext.cc
 +++ b/halimpl/hal/phNxpNciHal_ext.cc
 @@ -36,6 +36,7 @@ extern uint32_t cleanup_timer;
@@ -273,7 +273,7 @@ index 7908141..d75b6b4 100755
        phNxpNciHal_emergency_recovery();
        status = NFCSTATUS_FAILED;
      } /* Parsing CORE_INIT_RSP*/
-@@ -708,6 +723,10 @@ NFCSTATUS phNxpNciHal_write_ext(uint16_t* cmd_len, uint8_t* p_cmd_data,
+@@ -709,6 +724,10 @@ NFCSTATUS phNxpNciHal_write_ext(uint16_t* cmd_len, uint8_t* p_cmd_data,
      NXPLOG_NCIHAL_D("> Polling Loop Started");
      icode_detected = 0;
      icode_send_eof = 0;
@@ -284,7 +284,7 @@ index 7908141..d75b6b4 100755
    }
    // 22000100
    else if (p_cmd_data[0] == 0x22 && p_cmd_data[1] == 0x00 &&
-@@ -861,6 +880,28 @@ NFCSTATUS phNxpNciHal_write_ext(uint16_t* cmd_len, uint8_t* p_cmd_data,
+@@ -863,6 +882,28 @@ NFCSTATUS phNxpNciHal_write_ext(uint16_t* cmd_len, uint8_t* p_cmd_data,
      }
    }
  
@@ -380,5 +380,5 @@ index c1a14f4..03df5d4 100644
    abort();
  }
 -- 
-2.23.0
+2.27.0
 

@@ -1,4 +1,4 @@
-From eef8e65b13333416f9eea0a33f7686f737e07b75 Mon Sep 17 00:00:00 2001
+From 713f4963273b21678f3d36c87f40b6baaa3038c8 Mon Sep 17 00:00:00 2001
 From: Tao Bao <tbao@google.com>
 Date: Fri, 10 May 2019 09:39:32 -0700
 Subject: [PATCH 3/4] Build bootctrl.msm8996 with Android.bp.
@@ -29,5 +29,5 @@ index 4b94b7a..e1794d5 100644
  # TODO:  Find a better way to separate build configs for ADP vs non-ADP devices
  ifneq ($(BOARD_IS_AUTOMOTIVE),true)
 -- 
-2.23.0
+2.27.0
 

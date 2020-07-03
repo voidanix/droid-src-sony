@@ -1,4 +1,4 @@
-From 5159b460bf8a2774d19a23ad253c62455ea52929 Mon Sep 17 00:00:00 2001
+From 9b3766d9f04fdcd84ff588276131d682bcba7c74 Mon Sep 17 00:00:00 2001
 From: MarijnS95 <marijns95@gmail.com>
 Date: Wed, 4 Sep 2019 15:04:44 +0200
 Subject: [PATCH 7/7] hal: msm8916: Add missing bracket to close function
@@ -14,10 +14,10 @@ Signed-off-by: MarijnS95 <marijns95@gmail.com>
  1 file changed, 1 insertion(+)
 
 diff --git a/hal/msm8916/platform.c b/hal/msm8916/platform.c
-index 8a517a9..41727bd 100644
+index 7f161d8..8872d40 100644
 --- a/hal/msm8916/platform.c
 +++ b/hal/msm8916/platform.c
-@@ -1572,6 +1572,7 @@ static int platform_get_meta_info_key_from_list(void *platform, char *mod_name)
+@@ -1574,6 +1574,7 @@ static int platform_get_meta_info_key_from_list(void *platform, char *mod_name)
          }
      }
      return key;
@@ -26,5 +26,5 @@ index 8a517a9..41727bd 100644
  int platform_set_effect_config_data(snd_device_t snd_device,
                                        struct audio_effect_config effect_config,
 -- 
-2.23.0
+2.27.0
 

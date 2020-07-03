@@ -1,4 +1,4 @@
-From 28e4758ecd07ccd7f9cdb11db89b7c01de7cbc23 Mon Sep 17 00:00:00 2001
+From f5f9fc36aa5329f33a199ca468d1b4e54cf4c07e Mon Sep 17 00:00:00 2001
 From: Alin Jerpelea <alin.jerpelea@sony.com>
 Date: Thu, 22 Nov 2018 03:06:11 +0100
 Subject: [PATCH] guard use of kernel sources
@@ -61,5 +61,5 @@ index b8ae6a4..e2b1888 100644
  LOCAL_MODULE := ipa_nat_test
  LOCAL_SRC_FILES := ipa_nat_test000.c \
 -- 
-2.23.0
+2.27.0
 

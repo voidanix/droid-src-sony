@@ -1,4 +1,4 @@
-From 4adc43ddd42e985f48d0fce0e6efa0a3cec7ed44 Mon Sep 17 00:00:00 2001
+From b961d0830294845c81e2d12911a45c363b8564cf Mon Sep 17 00:00:00 2001
 From: Alin Jerpelea <alin.jerpelea@sony.com>
 Date: Thu, 9 Aug 2018 09:34:06 +0200
 Subject: [PATCH 5/7] hal: enable audio hal on sdm660
@@ -98,5 +98,5 @@ index c800d8f..5677f81 100644
  include $(CLEAR_VARS)
  
 -- 
-2.23.0
+2.27.0
 

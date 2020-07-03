@@ -1,4 +1,4 @@
-From d4f502e673bdb87a57e4888fe747f77a29cd1931 Mon Sep 17 00:00:00 2001
+From 29976405ba000b6d88403f9e11e2bc834660bf7b Mon Sep 17 00:00:00 2001
 From: Raman Tenneti <rtenneti@google.com>
 Date: Fri, 5 Apr 2019 19:04:14 -0700
 Subject: [PATCH] AOSP/Messaging - Update the Messaging version to 24 until
@@ -90,5 +90,5 @@ index 1c0d0b5..9643b1e 100644
  
          GetOrCreateConversationActionMonitor monitor =
 -- 
-2.23.0
+2.27.0
 

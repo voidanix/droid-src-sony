@@ -1,6 +1,6 @@
-From 1c18fdee268dd3bb682c54015578f60cbe976a27 Mon Sep 17 00:00:00 2001
+From a7990878550bf1b7bdc5172c34a321542d87eb0f Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Bj=C3=B6rn=20Bidar?= <theodorstormgrade@gmail.com>
-Date: Tue, 29 Oct 2019 15:26:18 +0100
+Date: Fri, 3 Jul 2020 12:50:49 +0200
 Subject: [PATCH 1/7] Revert "hal: Correct mixer control name for 3.5mm
  headphone"
 
@@ -10,7 +10,7 @@ This reverts commit 39a2b8a03c0a8a44940ac732f636d9cc1959eff2.
  1 file changed, 4 insertions(+), 11 deletions(-)
 
 diff --git a/hal/msm8974/platform.c b/hal/msm8974/platform.c
-index 41d8bd2..17d4fe9 100644
+index 8a2fc18..3244319 100644
 --- a/hal/msm8974/platform.c
 +++ b/hal/msm8974/platform.c
 @@ -1582,17 +1582,10 @@ platform_backend_config_init(struct platform_data *pdata)
@@ -36,5 +36,5 @@ index 41d8bd2..17d4fe9 100644
      pdata->current_backend_cfg[USB_AUDIO_RX_BACKEND].bitwidth_mixer_ctl =
              strdup("USB_AUDIO_RX Format");
 -- 
-2.23.0
+2.27.0
 

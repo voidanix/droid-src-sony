@@ -1,4 +1,4 @@
-From bf8cc6d8afda173d5f4009ea743a4c10e8e59346 Mon Sep 17 00:00:00 2001
+From 5ef17b7e68dcf8dfa3a9030dd92ee51fa2da402d Mon Sep 17 00:00:00 2001
 From: MarijnS95 <marijns95@gmail.com>
 Date: Mon, 9 Sep 2019 15:50:43 +0200
 Subject: [PATCH] verity: Do not increment data when it is nullptr.
@@ -35,5 +35,5 @@ index 197c38e5..d061ca5c 100644
    }
    if (len % block_size_ != 0) {
 -- 
-2.23.0
+2.27.0
 

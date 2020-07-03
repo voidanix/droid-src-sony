@@ -1,7 +1,7 @@
-From adfd80a1e8c2914b673ba306a22b03ba0b82d0e0 Mon Sep 17 00:00:00 2001
+From 76a45670de0fe6929dbfdf8a862ece99acdd8e26 Mon Sep 17 00:00:00 2001
 From: Park Ju Hyung <qkrwngud825@gmail.com>
 Date: Sun, 15 Jan 2017 03:33:04 +0900
-Subject: [PATCH 3/4] SystemUI: Implement burn-in protection for
+Subject: [PATCH 2/2] SystemUI: Implement burn-in protection for
  status-bar/nav-bar items
 
 Devices with OLED display suffer from
@@ -36,7 +36,7 @@ Signed-off-by: Pablo Mendez Hernandez <pablomh@gmail.com>
  create mode 100644 packages/SystemUI/src/com/android/systemui/statusbar/policy/BurnInProtectionController.java
 
 diff --git a/packages/SystemUI/res/values/config.xml b/packages/SystemUI/res/values/config.xml
-index 6e6c009dd18..4a80d2ae559 100644
+index c2189a30f23..1796fa6276f 100644
 --- a/packages/SystemUI/res/values/config.xml
 +++ b/packages/SystemUI/res/values/config.xml
 @@ -87,11 +87,20 @@
@@ -62,10 +62,10 @@ index 6e6c009dd18..4a80d2ae559 100644
      <integer name="quick_qs_panel_max_columns">6</integer>
  
 diff --git a/packages/SystemUI/res/values/dimens.xml b/packages/SystemUI/res/values/dimens.xml
-index c5e4662f6d4..ba0710d8eb2 100644
+index 0263329dbe8..c25460ca8c5 100644
 --- a/packages/SystemUI/res/values/dimens.xml
 +++ b/packages/SystemUI/res/values/dimens.xml
-@@ -971,6 +971,14 @@
+@@ -966,6 +966,14 @@
      <!-- The maximum offset in either direction that icons move to prevent burn-in on AOD. -->
      <dimen name="default_burn_in_prevention_offset">15dp</dimen>
  
@@ -81,10 +81,10 @@ index c5e4662f6d4..ba0710d8eb2 100644
      <dimen name="top_padding">0dp</dimen>
      <dimen name="bottom_padding">48dp</dimen>
 diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/phone/NavigationBarView.java b/packages/SystemUI/src/com/android/systemui/statusbar/phone/NavigationBarView.java
-index 776cd4d71c9..046272c1089 100644
+index a2740c8dc32..2cef0a4bbd2 100644
 --- a/packages/SystemUI/src/com/android/systemui/statusbar/phone/NavigationBarView.java
 +++ b/packages/SystemUI/src/com/android/systemui/statusbar/phone/NavigationBarView.java
-@@ -150,6 +150,13 @@ public class NavigationBarView extends FrameLayout implements
+@@ -153,6 +153,13 @@ public class NavigationBarView extends FrameLayout implements
       */
      private ScreenPinningNotify mScreenPinningNotify;
  
@@ -98,7 +98,7 @@ index 776cd4d71c9..046272c1089 100644
      private class NavTransitionListener implements TransitionListener {
          private boolean mBackTransitioning;
          private boolean mHomeAppearing;
-@@ -803,6 +810,18 @@ public class NavigationBarView extends FrameLayout implements
+@@ -819,6 +826,18 @@ public class NavigationBarView extends FrameLayout implements
          mRecentsOnboarding.hide(true);
      }
  
@@ -117,7 +117,7 @@ index 776cd4d71c9..046272c1089 100644
      @Override
      public void onFinishInflate() {
          mNavigationInflaterView = findViewById(R.id.navigation_inflater);
-@@ -810,6 +829,13 @@ public class NavigationBarView extends FrameLayout implements
+@@ -826,6 +845,13 @@ public class NavigationBarView extends FrameLayout implements
  
          getImeSwitchButton().setOnClickListener(mImeSwitcherClickListener);
  
@@ -132,10 +132,10 @@ index 776cd4d71c9..046272c1089 100644
          updateOrientationViews();
          reloadNavIcons();
 diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBarView.java b/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBarView.java
-index 68eba50984d..f687d0e3051 100644
+index 3d705da65f2..4fb229c67b0 100644
 --- a/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBarView.java
 +++ b/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBarView.java
-@@ -24,6 +24,7 @@ import static com.android.systemui.SysUiServiceProvider.getComponent;
+@@ -26,6 +26,7 @@ import static java.lang.Float.isNaN;
  import android.annotation.Nullable;
  import android.content.Context;
  import android.content.res.Configuration;
@@ -143,7 +143,7 @@ index 68eba50984d..f687d0e3051 100644
  import android.graphics.Point;
  import android.graphics.Rect;
  import android.util.AttributeSet;
-@@ -56,6 +57,13 @@ public class PhoneStatusBarView extends PanelBar {
+@@ -59,6 +60,13 @@ public class PhoneStatusBarView extends PanelBar {
      private static final int NO_VALUE = Integer.MIN_VALUE;
      private final CommandQueue mCommandQueue;
  
@@ -175,8 +175,8 @@ index 68eba50984d..f687d0e3051 100644
 +
      @Override
      public void onFinishInflate() {
-         mBarTransitions.init();
-@@ -110,6 +130,13 @@ public class PhoneStatusBarView extends PanelBar {
+         mBattery = findViewById(R.id.battery);
+@@ -109,6 +129,13 @@ public class PhoneStatusBarView extends PanelBar {
          mCenterIconSpace = findViewById(R.id.centered_icon_area);
  
          updateResources();
@@ -191,10 +191,10 @@ index 68eba50984d..f687d0e3051 100644
  
      @Override
 diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBar.java b/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBar.java
-index c6de829e49b..f3eebab34be 100644
+index cc691ae2d9b..a9a495f8e85 100644
 --- a/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBar.java
 +++ b/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBar.java
-@@ -212,6 +212,7 @@ import com.android.systemui.statusbar.phone.UnlockMethodCache.OnUnlockMethodChan
+@@ -214,6 +214,7 @@ import com.android.systemui.statusbar.phone.UnlockMethodCache.OnUnlockMethodChan
  import com.android.systemui.statusbar.policy.BatteryController;
  import com.android.systemui.statusbar.policy.BatteryController.BatteryStateChangeCallback;
  import com.android.systemui.statusbar.policy.BrightnessMirrorController;
@@ -202,7 +202,7 @@ index c6de829e49b..f3eebab34be 100644
  import com.android.systemui.statusbar.policy.ConfigurationController;
  import com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener;
  import com.android.systemui.statusbar.policy.DeviceProvisionedController;
-@@ -347,6 +348,8 @@ public class StatusBar extends SystemUI implements DemoMode,
+@@ -349,6 +350,8 @@ public class StatusBar extends SystemUI implements DemoMode,
      @VisibleForTesting
      protected AutoHideController mAutoHideController;
  
@@ -211,7 +211,7 @@ index c6de829e49b..f3eebab34be 100644
      private int mNaturalBarHeight = -1;
  
      private final Point mCurrentDisplaySize = new Point();
-@@ -847,6 +850,8 @@ public class StatusBar extends SystemUI implements DemoMode,
+@@ -869,6 +872,8 @@ public class StatusBar extends SystemUI implements DemoMode,
                      mStatusBarWindow.setStatusBarView(mStatusBarView);
                      updateAreThereNotifications();
                      checkBarModes();
@@ -220,7 +220,7 @@ index c6de829e49b..f3eebab34be 100644
                  }).getFragmentManager()
                  .beginTransaction()
                  .replace(R.id.status_bar_container, new CollapsedStatusBarFragment(),
-@@ -3607,6 +3612,9 @@ public class StatusBar extends SystemUI implements DemoMode,
+@@ -3738,6 +3743,9 @@ public class StatusBar extends SystemUI implements DemoMode,
  
              updateNotificationPanelTouchState();
              mStatusBarWindow.cancelCurrentTouch();
@@ -230,7 +230,7 @@ index c6de829e49b..f3eebab34be 100644
              if (mLaunchCameraOnFinishedGoingToSleep) {
                  mLaunchCameraOnFinishedGoingToSleep = false;
  
-@@ -3648,6 +3656,9 @@ public class StatusBar extends SystemUI implements DemoMode,
+@@ -3786,6 +3794,9 @@ public class StatusBar extends SystemUI implements DemoMode,
                  mLaunchCameraWhenFinishedWaking = false;
              }
              updateScrimController();
@@ -368,5 +368,5 @@ index 00000000000..a2fd65fbac9
 +    }
 +}
 -- 
-2.23.0
+2.27.0
 
