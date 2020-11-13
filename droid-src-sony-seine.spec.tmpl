@@ -1,0 +1,29 @@
+# Copy this file to your device tree, next to the .spec and dhs submodule
+# Replace @...@ accordingly
+
+# device is the codename for the device
+%define device pdx201
+
+%define ha_device_override sony-seine
+
+%include define-trees
+
+%define device_variant -user
+%define lunch_device aosp_xqau52
+%define pre_actions sudo update-java-alternatives -s java-1.8.0-openjdk-amd64
+
+%define post_build_actions mv rpm/patches patches; /bin/sh ./rpm/apply-patches.sh
+
+# Our promotions fail, because rpm v4.9 can't handle conditional macros well, see JB#33275
+# Let's work around it for now:
+%define dhs_name_hardcoded droid-src-%{ha_device_override}
+# If dhs_flavour is set to e.g. syspart, then the hardcoded name should be:
+#define dhs_name_hardcoded droid-src-syspart-%{ha_device_override}
+
+%define dhs_sources \
+Source52: %{dhs_name_hardcoded}.spec.tmpl\
+Source53: source.paths\
+Source54: apply-patches.sh\
+%{nil}
+
+%include dhs/droid-hal-source.inc
