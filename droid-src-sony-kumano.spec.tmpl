@@ -9,7 +9,7 @@
 %include define-trees
 
 %define device_variant -user
-%define lunch_device aosp_i4113
+%define lunch_device aosp_j9110
 %define pre_actions sudo update-java-alternatives -s java-1.8.0-openjdk-amd64
 
 %define post_build_actions mv rpm/patches patches; /bin/sh ./rpm/apply-patches.sh
