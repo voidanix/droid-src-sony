@@ -9,7 +9,7 @@
 %include define-trees
 
 %define device_variant -user
-%define lunch_device aosp_i4113
+%define lunch_device aosp_j9110
 %define pre_actions sudo update-java-alternatives -s java-1.8.0-openjdk-amd64
 
 %define post_build_actions mv rpm/patches patches; /bin/sh ./rpm/apply-patches.sh
@@ -24,6 +24,7 @@
 Source52: %{dhs_name_hardcoded}.spec.tmpl\
 Source53: source.paths\
 Source54: apply-patches.sh\
+%include other-tmpl-sources
 %{nil}
 
 %include dhs/droid-hal-source.inc
