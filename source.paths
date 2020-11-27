@@ -3,7 +3,6 @@ development
 libcore
 platform_testing
 toolchain
-compatibility
 device
 libnativehelper
 prebuilts

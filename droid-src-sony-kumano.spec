@@ -11,7 +11,7 @@
 %define ha_device_override sony-kumano
 
 # repo service performed : %%include define-trees
-%define dhs_trees build development libcore platform_testing toolchain compatibility device libnativehelper prebuilts tools art cts external vendor bionic dalvik frameworks sdk bootable hardware packages system developers kernel pdk test
+%define dhs_trees build development libcore platform_testing toolchain device libnativehelper prebuilts tools art cts external vendor bionic dalvik frameworks sdk bootable hardware packages system developers kernel pdk test
 
 %define device_variant -user
 %define lunch_device aosp_j9110
@@ -157,7 +157,7 @@ Provides: droid-bin-src-full
 Group:  System
 AutoReqProv: no
 Requires(post): /bin/sh
-Requires: %{dhs_feature}-dhs-rootdir %{dhs_feature}-build %{dhs_feature}-development %{dhs_feature}-libcore %{dhs_feature}-platform_testing %{dhs_feature}-toolchain %{dhs_feature}-compatibility %{dhs_feature}-device %{dhs_feature}-libnativehelper %{dhs_feature}-prebuilts %{dhs_feature}-tools %{dhs_feature}-art %{dhs_feature}-cts %{dhs_feature}-external %{dhs_feature}-vendor %{dhs_feature}-bionic %{dhs_feature}-dalvik %{dhs_feature}-frameworks %{dhs_feature}-sdk %{dhs_feature}-bootable %{dhs_feature}-hardware %{dhs_feature}-packages %{dhs_feature}-system %{dhs_feature}-developers %{dhs_feature}-kernel %{dhs_feature}-pdk %{dhs_feature}-test
+Requires: %{dhs_feature}-dhs-rootdir %{dhs_feature}-build %{dhs_feature}-development %{dhs_feature}-libcore %{dhs_feature}-platform_testing %{dhs_feature}-toolchain %{dhs_feature}-device %{dhs_feature}-libnativehelper %{dhs_feature}-prebuilts %{dhs_feature}-tools %{dhs_feature}-art %{dhs_feature}-cts %{dhs_feature}-external %{dhs_feature}-vendor %{dhs_feature}-bionic %{dhs_feature}-dalvik %{dhs_feature}-frameworks %{dhs_feature}-sdk %{dhs_feature}-bootable %{dhs_feature}-hardware %{dhs_feature}-packages %{dhs_feature}-system %{dhs_feature}-developers %{dhs_feature}-kernel %{dhs_feature}-pdk %{dhs_feature}-test
 Summary: Syspart source for all the src trees to be used for droid-side code building
 %description dhs-full
 This is the full src tree for the %{dhs_name} manifest.
@@ -248,17 +248,6 @@ Requires(post): /bin/sh
 Summary: Source for the toolchain src tree to be used for droid-side code building
 %description toolchain
 This is the src tree for the toolchain subdirectory from the %{device} manifest.
-It is only meant for use in the OBS.
-
-%package compatibility
-Provides: %{dhs_feature}-compatibility
-Group:  System
-AutoReqProv: no
-Requires: %{dhs_feature}-dhs-utils %{dhs_feature}-dhs-makefile
-Requires(post): /bin/sh
-Summary: Source for the compatibility src tree to be used for droid-side code building
-%description compatibility
-This is the src tree for the compatibility subdirectory from the %{device} manifest.
 It is only meant for use in the OBS.
 
 %package device
@@ -625,13 +614,6 @@ chown -R 399:399 /home/abuild/src/droid/toolchain
 %files toolchain
 %defattr(-,root,root,-)
 /home/abuild/src/droid/toolchain
-
-%post compatibility
-# The abuild user is not setup at post time so we use the numeric id
-chown -R 399:399 /home/abuild/src/droid/compatibility
-%files compatibility
-%defattr(-,root,root,-)
-/home/abuild/src/droid/compatibility
 
 %post device
 # The abuild user is not setup at post time so we use the numeric id
