@@ -29,8 +29,8 @@
 Source52: %{dhs_name_hardcoded}.spec.tmpl\
 Source53: source.paths\
 Source54: apply-patches.sh\
-# repo service performed : %%include other-tmpl-sources
-Source100: droid-src-sony-seine.spec.tmpl
+Source55: precheckin.sh\
+Source100: droid-src-sony-seine.spec.tmpl\
 %{nil}
 
 # repo service performed : %%include dhs/droid-hal-source.inc

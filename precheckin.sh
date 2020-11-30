@@ -14,10 +14,12 @@ for f in "${tmpls[@]}"; do
     i=100
     for tmpl in "${tmpls[@]}"; do
         if [ "$tmpl" != "$f" ]; then
-            echo "Source$i: $tmpl" >> other-tmpl-sources
+            echo "Source$i: $tmpl\\" >> other-tmpl-sources
             ((i++))
         fi
     done
-    ./dhs/precheckin.sh "${f%.tmpl}"
+    s="${f%.tmpl}"
+    ./dhs/precheckin.sh "$s"
+    sed -i '/# repo service performed : %%include other-tmpl-sources/d' "$s"
 done
 rm -f other-tmpl-sources
