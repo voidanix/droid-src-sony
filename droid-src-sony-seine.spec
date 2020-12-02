@@ -11,7 +11,7 @@
 %define ha_device_override sony-seine
 
 # repo service performed : %%include define-trees
-%define dhs_trees build development libcore platform_testing toolchain device libnativehelper prebuilts tools art cts external vendor bionic dalvik frameworks sdk bootable hardware packages system developers kernel pdk test
+%define dhs_trees build development libcore platform_testing toolchain device libnativehelper tools art cts external vendor bionic dalvik frameworks sdk bootable hardware packages system developers kernel pdk test prebuilts/abi-dumps prebuilts/asuite prebuilts/build-tools prebuilts/bundletool prebuilts/checkcolor prebuilts/checkstyle prebuilts/clang-tools prebuilts/clang prebuilts/devtools prebuilts/fuchsia_sdk prebuilts/gcc prebuilts/gdb prebuilts/go prebuilts/gradle-plugin prebuilts/jdk prebuilts/ktlint prebuilts/manifest-merger prebuilts/maven_repo prebuilts/misc prebuilts/ndk prebuilts/python prebuilts/r8 prebuilts/sdk prebuilts/tools prebuilts/vndk
 
 %define device_variant -user
 %define lunch_device aosp_xqau52
@@ -159,7 +159,7 @@ Provides: droid-bin-src-full
 Group:  System
 AutoReqProv: no
 Requires(post): /bin/sh
-Requires: %{dhs_feature}-dhs-rootdir %{dhs_feature}-build %{dhs_feature}-development %{dhs_feature}-libcore %{dhs_feature}-platform_testing %{dhs_feature}-toolchain %{dhs_feature}-device %{dhs_feature}-libnativehelper %{dhs_feature}-prebuilts %{dhs_feature}-tools %{dhs_feature}-art %{dhs_feature}-cts %{dhs_feature}-external %{dhs_feature}-vendor %{dhs_feature}-bionic %{dhs_feature}-dalvik %{dhs_feature}-frameworks %{dhs_feature}-sdk %{dhs_feature}-bootable %{dhs_feature}-hardware %{dhs_feature}-packages %{dhs_feature}-system %{dhs_feature}-developers %{dhs_feature}-kernel %{dhs_feature}-pdk %{dhs_feature}-test
+Requires: %{dhs_feature}-dhs-rootdir %{dhs_feature}-build %{dhs_feature}-development %{dhs_feature}-libcore %{dhs_feature}-platform_testing %{dhs_feature}-toolchain %{dhs_feature}-device %{dhs_feature}-libnativehelper %{dhs_feature}-tools %{dhs_feature}-art %{dhs_feature}-cts %{dhs_feature}-external %{dhs_feature}-vendor %{dhs_feature}-bionic %{dhs_feature}-dalvik %{dhs_feature}-frameworks %{dhs_feature}-sdk %{dhs_feature}-bootable %{dhs_feature}-hardware %{dhs_feature}-packages %{dhs_feature}-system %{dhs_feature}-developers %{dhs_feature}-kernel %{dhs_feature}-pdk %{dhs_feature}-test %{dhs_feature}-prebuilts-abi-dumps %{dhs_feature}-prebuilts-asuite %{dhs_feature}-prebuilts-build-tools %{dhs_feature}-prebuilts-bundletool %{dhs_feature}-prebuilts-checkcolor %{dhs_feature}-prebuilts-checkstyle %{dhs_feature}-prebuilts-clang-tools %{dhs_feature}-prebuilts-clang %{dhs_feature}-prebuilts-devtools %{dhs_feature}-prebuilts-fuchsia_sdk %{dhs_feature}-prebuilts-gcc %{dhs_feature}-prebuilts-gdb %{dhs_feature}-prebuilts-go %{dhs_feature}-prebuilts-gradle-plugin %{dhs_feature}-prebuilts-jdk %{dhs_feature}-prebuilts-ktlint %{dhs_feature}-prebuilts-manifest-merger %{dhs_feature}-prebuilts-maven_repo %{dhs_feature}-prebuilts-misc %{dhs_feature}-prebuilts-ndk %{dhs_feature}-prebuilts-python %{dhs_feature}-prebuilts-r8 %{dhs_feature}-prebuilts-sdk %{dhs_feature}-prebuilts-tools %{dhs_feature}-prebuilts-vndk
 Summary: Syspart source for all the src trees to be used for droid-side code building
 %description dhs-full
 This is the full src tree for the %{dhs_name} manifest.
@@ -272,17 +272,6 @@ Requires(post): /bin/sh
 Summary: Source for the libnativehelper src tree to be used for droid-side code building
 %description libnativehelper
 This is the src tree for the libnativehelper subdirectory from the %{device} manifest.
-It is only meant for use in the OBS.
-
-%package prebuilts
-Provides: %{dhs_feature}-prebuilts
-Group:  System
-AutoReqProv: no
-Requires: %{dhs_feature}-dhs-utils %{dhs_feature}-dhs-makefile
-Requires(post): /bin/sh
-Summary: Source for the prebuilts src tree to be used for droid-side code building
-%description prebuilts
-This is the src tree for the prebuilts subdirectory from the %{device} manifest.
 It is only meant for use in the OBS.
 
 %package tools
@@ -472,6 +461,281 @@ Summary: Source for the test src tree to be used for droid-side code building
 This is the src tree for the test subdirectory from the %{device} manifest.
 It is only meant for use in the OBS.
 
+%package prebuilts-abi-dumps
+Provides: %{dhs_feature}-prebuilts-abi-dumps
+Group:  System
+AutoReqProv: no
+Requires: %{dhs_feature}-dhs-utils %{dhs_feature}-dhs-makefile
+Requires(post): /bin/sh
+Summary: Source for the prebuilts-abi-dumps src tree to be used for droid-side code building
+%description prebuilts-abi-dumps
+This is the src tree for the prebuilts-abi-dumps subdirectory from the %{device} manifest.
+It is only meant for use in the OBS.
+
+%package prebuilts-asuite
+Provides: %{dhs_feature}-prebuilts-asuite
+Group:  System
+AutoReqProv: no
+Requires: %{dhs_feature}-dhs-utils %{dhs_feature}-dhs-makefile
+Requires(post): /bin/sh
+Summary: Source for the prebuilts-asuite src tree to be used for droid-side code building
+%description prebuilts-asuite
+This is the src tree for the prebuilts-asuite subdirectory from the %{device} manifest.
+It is only meant for use in the OBS.
+
+%package prebuilts-build-tools
+Provides: %{dhs_feature}-prebuilts-build-tools
+Group:  System
+AutoReqProv: no
+Requires: %{dhs_feature}-dhs-utils %{dhs_feature}-dhs-makefile
+Requires(post): /bin/sh
+Summary: Source for the prebuilts-build-tools src tree to be used for droid-side code building
+%description prebuilts-build-tools
+This is the src tree for the prebuilts-build-tools subdirectory from the %{device} manifest.
+It is only meant for use in the OBS.
+
+%package prebuilts-bundletool
+Provides: %{dhs_feature}-prebuilts-bundletool
+Group:  System
+AutoReqProv: no
+Requires: %{dhs_feature}-dhs-utils %{dhs_feature}-dhs-makefile
+Requires(post): /bin/sh
+Summary: Source for the prebuilts-bundletool src tree to be used for droid-side code building
+%description prebuilts-bundletool
+This is the src tree for the prebuilts-bundletool subdirectory from the %{device} manifest.
+It is only meant for use in the OBS.
+
+%package prebuilts-checkcolor
+Provides: %{dhs_feature}-prebuilts-checkcolor
+Group:  System
+AutoReqProv: no
+Requires: %{dhs_feature}-dhs-utils %{dhs_feature}-dhs-makefile
+Requires(post): /bin/sh
+Summary: Source for the prebuilts-checkcolor src tree to be used for droid-side code building
+%description prebuilts-checkcolor
+This is the src tree for the prebuilts-checkcolor subdirectory from the %{device} manifest.
+It is only meant for use in the OBS.
+
+%package prebuilts-checkstyle
+Provides: %{dhs_feature}-prebuilts-checkstyle
+Group:  System
+AutoReqProv: no
+Requires: %{dhs_feature}-dhs-utils %{dhs_feature}-dhs-makefile
+Requires(post): /bin/sh
+Summary: Source for the prebuilts-checkstyle src tree to be used for droid-side code building
+%description prebuilts-checkstyle
+This is the src tree for the prebuilts-checkstyle subdirectory from the %{device} manifest.
+It is only meant for use in the OBS.
+
+%package prebuilts-clang-tools
+Provides: %{dhs_feature}-prebuilts-clang-tools
+Group:  System
+AutoReqProv: no
+Requires: %{dhs_feature}-dhs-utils %{dhs_feature}-dhs-makefile
+Requires(post): /bin/sh
+Summary: Source for the prebuilts-clang-tools src tree to be used for droid-side code building
+%description prebuilts-clang-tools
+This is the src tree for the prebuilts-clang-tools subdirectory from the %{device} manifest.
+It is only meant for use in the OBS.
+
+%package prebuilts-clang
+Provides: %{dhs_feature}-prebuilts-clang
+Group:  System
+AutoReqProv: no
+Requires: %{dhs_feature}-dhs-utils %{dhs_feature}-dhs-makefile
+Requires(post): /bin/sh
+Summary: Source for the prebuilts-clang src tree to be used for droid-side code building
+%description prebuilts-clang
+This is the src tree for the prebuilts-clang subdirectory from the %{device} manifest.
+It is only meant for use in the OBS.
+
+%package prebuilts-devtools
+Provides: %{dhs_feature}-prebuilts-devtools
+Group:  System
+AutoReqProv: no
+Requires: %{dhs_feature}-dhs-utils %{dhs_feature}-dhs-makefile
+Requires(post): /bin/sh
+Summary: Source for the prebuilts-devtools src tree to be used for droid-side code building
+%description prebuilts-devtools
+This is the src tree for the prebuilts-devtools subdirectory from the %{device} manifest.
+It is only meant for use in the OBS.
+
+%package prebuilts-fuchsia_sdk
+Provides: %{dhs_feature}-prebuilts-fuchsia_sdk
+Group:  System
+AutoReqProv: no
+Requires: %{dhs_feature}-dhs-utils %{dhs_feature}-dhs-makefile
+Requires(post): /bin/sh
+Summary: Source for the prebuilts-fuchsia_sdk src tree to be used for droid-side code building
+%description prebuilts-fuchsia_sdk
+This is the src tree for the prebuilts-fuchsia_sdk subdirectory from the %{device} manifest.
+It is only meant for use in the OBS.
+
+%package prebuilts-gcc
+Provides: %{dhs_feature}-prebuilts-gcc
+Group:  System
+AutoReqProv: no
+Requires: %{dhs_feature}-dhs-utils %{dhs_feature}-dhs-makefile
+Requires(post): /bin/sh
+Summary: Source for the prebuilts-gcc src tree to be used for droid-side code building
+%description prebuilts-gcc
+This is the src tree for the prebuilts-gcc subdirectory from the %{device} manifest.
+It is only meant for use in the OBS.
+
+%package prebuilts-gdb
+Provides: %{dhs_feature}-prebuilts-gdb
+Group:  System
+AutoReqProv: no
+Requires: %{dhs_feature}-dhs-utils %{dhs_feature}-dhs-makefile
+Requires(post): /bin/sh
+Summary: Source for the prebuilts-gdb src tree to be used for droid-side code building
+%description prebuilts-gdb
+This is the src tree for the prebuilts-gdb subdirectory from the %{device} manifest.
+It is only meant for use in the OBS.
+
+%package prebuilts-go
+Provides: %{dhs_feature}-prebuilts-go
+Group:  System
+AutoReqProv: no
+Requires: %{dhs_feature}-dhs-utils %{dhs_feature}-dhs-makefile
+Requires(post): /bin/sh
+Summary: Source for the prebuilts-go src tree to be used for droid-side code building
+%description prebuilts-go
+This is the src tree for the prebuilts-go subdirectory from the %{device} manifest.
+It is only meant for use in the OBS.
+
+%package prebuilts-gradle-plugin
+Provides: %{dhs_feature}-prebuilts-gradle-plugin
+Group:  System
+AutoReqProv: no
+Requires: %{dhs_feature}-dhs-utils %{dhs_feature}-dhs-makefile
+Requires(post): /bin/sh
+Summary: Source for the prebuilts-gradle-plugin src tree to be used for droid-side code building
+%description prebuilts-gradle-plugin
+This is the src tree for the prebuilts-gradle-plugin subdirectory from the %{device} manifest.
+It is only meant for use in the OBS.
+
+%package prebuilts-jdk
+Provides: %{dhs_feature}-prebuilts-jdk
+Group:  System
+AutoReqProv: no
+Requires: %{dhs_feature}-dhs-utils %{dhs_feature}-dhs-makefile
+Requires(post): /bin/sh
+Summary: Source for the prebuilts-jdk src tree to be used for droid-side code building
+%description prebuilts-jdk
+This is the src tree for the prebuilts-jdk subdirectory from the %{device} manifest.
+It is only meant for use in the OBS.
+
+%package prebuilts-ktlint
+Provides: %{dhs_feature}-prebuilts-ktlint
+Group:  System
+AutoReqProv: no
+Requires: %{dhs_feature}-dhs-utils %{dhs_feature}-dhs-makefile
+Requires(post): /bin/sh
+Summary: Source for the prebuilts-ktlint src tree to be used for droid-side code building
+%description prebuilts-ktlint
+This is the src tree for the prebuilts-ktlint subdirectory from the %{device} manifest.
+It is only meant for use in the OBS.
+
+%package prebuilts-manifest-merger
+Provides: %{dhs_feature}-prebuilts-manifest-merger
+Group:  System
+AutoReqProv: no
+Requires: %{dhs_feature}-dhs-utils %{dhs_feature}-dhs-makefile
+Requires(post): /bin/sh
+Summary: Source for the prebuilts-manifest-merger src tree to be used for droid-side code building
+%description prebuilts-manifest-merger
+This is the src tree for the prebuilts-manifest-merger subdirectory from the %{device} manifest.
+It is only meant for use in the OBS.
+
+%package prebuilts-maven_repo
+Provides: %{dhs_feature}-prebuilts-maven_repo
+Group:  System
+AutoReqProv: no
+Requires: %{dhs_feature}-dhs-utils %{dhs_feature}-dhs-makefile
+Requires(post): /bin/sh
+Summary: Source for the prebuilts-maven_repo src tree to be used for droid-side code building
+%description prebuilts-maven_repo
+This is the src tree for the prebuilts-maven_repo subdirectory from the %{device} manifest.
+It is only meant for use in the OBS.
+
+%package prebuilts-misc
+Provides: %{dhs_feature}-prebuilts-misc
+Group:  System
+AutoReqProv: no
+Requires: %{dhs_feature}-dhs-utils %{dhs_feature}-dhs-makefile
+Requires(post): /bin/sh
+Summary: Source for the prebuilts-misc src tree to be used for droid-side code building
+%description prebuilts-misc
+This is the src tree for the prebuilts-misc subdirectory from the %{device} manifest.
+It is only meant for use in the OBS.
+
+%package prebuilts-ndk
+Provides: %{dhs_feature}-prebuilts-ndk
+Group:  System
+AutoReqProv: no
+Requires: %{dhs_feature}-dhs-utils %{dhs_feature}-dhs-makefile
+Requires(post): /bin/sh
+Summary: Source for the prebuilts-ndk src tree to be used for droid-side code building
+%description prebuilts-ndk
+This is the src tree for the prebuilts-ndk subdirectory from the %{device} manifest.
+It is only meant for use in the OBS.
+
+%package prebuilts-python
+Provides: %{dhs_feature}-prebuilts-python
+Group:  System
+AutoReqProv: no
+Requires: %{dhs_feature}-dhs-utils %{dhs_feature}-dhs-makefile
+Requires(post): /bin/sh
+Summary: Source for the prebuilts-python src tree to be used for droid-side code building
+%description prebuilts-python
+This is the src tree for the prebuilts-python subdirectory from the %{device} manifest.
+It is only meant for use in the OBS.
+
+%package prebuilts-r8
+Provides: %{dhs_feature}-prebuilts-r8
+Group:  System
+AutoReqProv: no
+Requires: %{dhs_feature}-dhs-utils %{dhs_feature}-dhs-makefile
+Requires(post): /bin/sh
+Summary: Source for the prebuilts-r8 src tree to be used for droid-side code building
+%description prebuilts-r8
+This is the src tree for the prebuilts-r8 subdirectory from the %{device} manifest.
+It is only meant for use in the OBS.
+
+%package prebuilts-sdk
+Provides: %{dhs_feature}-prebuilts-sdk
+Group:  System
+AutoReqProv: no
+Requires: %{dhs_feature}-dhs-utils %{dhs_feature}-dhs-makefile
+Requires(post): /bin/sh
+Summary: Source for the prebuilts-sdk src tree to be used for droid-side code building
+%description prebuilts-sdk
+This is the src tree for the prebuilts-sdk subdirectory from the %{device} manifest.
+It is only meant for use in the OBS.
+
+%package prebuilts-tools
+Provides: %{dhs_feature}-prebuilts-tools
+Group:  System
+AutoReqProv: no
+Requires: %{dhs_feature}-dhs-utils %{dhs_feature}-dhs-makefile
+Requires(post): /bin/sh
+Summary: Source for the prebuilts-tools src tree to be used for droid-side code building
+%description prebuilts-tools
+This is the src tree for the prebuilts-tools subdirectory from the %{device} manifest.
+It is only meant for use in the OBS.
+
+%package prebuilts-vndk
+Provides: %{dhs_feature}-prebuilts-vndk
+Group:  System
+AutoReqProv: no
+Requires: %{dhs_feature}-dhs-utils %{dhs_feature}-dhs-makefile
+Requires(post): /bin/sh
+Summary: Source for the prebuilts-vndk src tree to be used for droid-side code building
+%description prebuilts-vndk
+This is the src tree for the prebuilts-vndk subdirectory from the %{device} manifest.
+It is only meant for use in the OBS.
+
 %endif
 
 %prep
@@ -631,13 +895,6 @@ chown -R 399:399 /home/abuild/src/droid/libnativehelper
 %defattr(-,root,root,-)
 /home/abuild/src/droid/libnativehelper
 
-%post prebuilts
-# The abuild user is not setup at post time so we use the numeric id
-chown -R 399:399 /home/abuild/src/droid/prebuilts
-%files prebuilts
-%defattr(-,root,root,-)
-/home/abuild/src/droid/prebuilts
-
 %post tools
 # The abuild user is not setup at post time so we use the numeric id
 chown -R 399:399 /home/abuild/src/droid/tools
@@ -756,5 +1013,180 @@ chown -R 399:399 /home/abuild/src/droid/test
 %files test
 %defattr(-,root,root,-)
 /home/abuild/src/droid/test
+
+%post prebuilts-abi-dumps
+# The abuild user is not setup at post time so we use the numeric id
+chown -R 399:399 /home/abuild/src/droid/prebuilts/abi-dumps
+%files prebuilts-abi-dumps
+%defattr(-,root,root,-)
+/home/abuild/src/droid/prebuilts/abi-dumps
+
+%post prebuilts-asuite
+# The abuild user is not setup at post time so we use the numeric id
+chown -R 399:399 /home/abuild/src/droid/prebuilts/asuite
+%files prebuilts-asuite
+%defattr(-,root,root,-)
+/home/abuild/src/droid/prebuilts/asuite
+
+%post prebuilts-build-tools
+# The abuild user is not setup at post time so we use the numeric id
+chown -R 399:399 /home/abuild/src/droid/prebuilts/build-tools
+%files prebuilts-build-tools
+%defattr(-,root,root,-)
+/home/abuild/src/droid/prebuilts/build-tools
+
+%post prebuilts-bundletool
+# The abuild user is not setup at post time so we use the numeric id
+chown -R 399:399 /home/abuild/src/droid/prebuilts/bundletool
+%files prebuilts-bundletool
+%defattr(-,root,root,-)
+/home/abuild/src/droid/prebuilts/bundletool
+
+%post prebuilts-checkcolor
+# The abuild user is not setup at post time so we use the numeric id
+chown -R 399:399 /home/abuild/src/droid/prebuilts/checkcolor
+%files prebuilts-checkcolor
+%defattr(-,root,root,-)
+/home/abuild/src/droid/prebuilts/checkcolor
+
+%post prebuilts-checkstyle
+# The abuild user is not setup at post time so we use the numeric id
+chown -R 399:399 /home/abuild/src/droid/prebuilts/checkstyle
+%files prebuilts-checkstyle
+%defattr(-,root,root,-)
+/home/abuild/src/droid/prebuilts/checkstyle
+
+%post prebuilts-clang-tools
+# The abuild user is not setup at post time so we use the numeric id
+chown -R 399:399 /home/abuild/src/droid/prebuilts/clang-tools
+%files prebuilts-clang-tools
+%defattr(-,root,root,-)
+/home/abuild/src/droid/prebuilts/clang-tools
+
+%post prebuilts-clang
+# The abuild user is not setup at post time so we use the numeric id
+chown -R 399:399 /home/abuild/src/droid/prebuilts/clang
+%files prebuilts-clang
+%defattr(-,root,root,-)
+/home/abuild/src/droid/prebuilts/clang
+
+%post prebuilts-devtools
+# The abuild user is not setup at post time so we use the numeric id
+chown -R 399:399 /home/abuild/src/droid/prebuilts/devtools
+%files prebuilts-devtools
+%defattr(-,root,root,-)
+/home/abuild/src/droid/prebuilts/devtools
+
+%post prebuilts-fuchsia_sdk
+# The abuild user is not setup at post time so we use the numeric id
+chown -R 399:399 /home/abuild/src/droid/prebuilts/fuchsia_sdk
+%files prebuilts-fuchsia_sdk
+%defattr(-,root,root,-)
+/home/abuild/src/droid/prebuilts/fuchsia_sdk
+
+%post prebuilts-gcc
+# The abuild user is not setup at post time so we use the numeric id
+chown -R 399:399 /home/abuild/src/droid/prebuilts/gcc
+%files prebuilts-gcc
+%defattr(-,root,root,-)
+/home/abuild/src/droid/prebuilts/gcc
+
+%post prebuilts-gdb
+# The abuild user is not setup at post time so we use the numeric id
+chown -R 399:399 /home/abuild/src/droid/prebuilts/gdb
+%files prebuilts-gdb
+%defattr(-,root,root,-)
+/home/abuild/src/droid/prebuilts/gdb
+
+%post prebuilts-go
+# The abuild user is not setup at post time so we use the numeric id
+chown -R 399:399 /home/abuild/src/droid/prebuilts/go
+%files prebuilts-go
+%defattr(-,root,root,-)
+/home/abuild/src/droid/prebuilts/go
+
+%post prebuilts-gradle-plugin
+# The abuild user is not setup at post time so we use the numeric id
+chown -R 399:399 /home/abuild/src/droid/prebuilts/gradle-plugin
+%files prebuilts-gradle-plugin
+%defattr(-,root,root,-)
+/home/abuild/src/droid/prebuilts/gradle-plugin
+
+%post prebuilts-jdk
+# The abuild user is not setup at post time so we use the numeric id
+chown -R 399:399 /home/abuild/src/droid/prebuilts/jdk
+%files prebuilts-jdk
+%defattr(-,root,root,-)
+/home/abuild/src/droid/prebuilts/jdk
+
+%post prebuilts-ktlint
+# The abuild user is not setup at post time so we use the numeric id
+chown -R 399:399 /home/abuild/src/droid/prebuilts/ktlint
+%files prebuilts-ktlint
+%defattr(-,root,root,-)
+/home/abuild/src/droid/prebuilts/ktlint
+
+%post prebuilts-manifest-merger
+# The abuild user is not setup at post time so we use the numeric id
+chown -R 399:399 /home/abuild/src/droid/prebuilts/manifest-merger
+%files prebuilts-manifest-merger
+%defattr(-,root,root,-)
+/home/abuild/src/droid/prebuilts/manifest-merger
+
+%post prebuilts-maven_repo
+# The abuild user is not setup at post time so we use the numeric id
+chown -R 399:399 /home/abuild/src/droid/prebuilts/maven_repo
+%files prebuilts-maven_repo
+%defattr(-,root,root,-)
+/home/abuild/src/droid/prebuilts/maven_repo
+
+%post prebuilts-misc
+# The abuild user is not setup at post time so we use the numeric id
+chown -R 399:399 /home/abuild/src/droid/prebuilts/misc
+%files prebuilts-misc
+%defattr(-,root,root,-)
+/home/abuild/src/droid/prebuilts/misc
+
+%post prebuilts-ndk
+# The abuild user is not setup at post time so we use the numeric id
+chown -R 399:399 /home/abuild/src/droid/prebuilts/ndk
+%files prebuilts-ndk
+%defattr(-,root,root,-)
+/home/abuild/src/droid/prebuilts/ndk
+
+%post prebuilts-python
+# The abuild user is not setup at post time so we use the numeric id
+chown -R 399:399 /home/abuild/src/droid/prebuilts/python
+%files prebuilts-python
+%defattr(-,root,root,-)
+/home/abuild/src/droid/prebuilts/python
+
+%post prebuilts-r8
+# The abuild user is not setup at post time so we use the numeric id
+chown -R 399:399 /home/abuild/src/droid/prebuilts/r8
+%files prebuilts-r8
+%defattr(-,root,root,-)
+/home/abuild/src/droid/prebuilts/r8
+
+%post prebuilts-sdk
+# The abuild user is not setup at post time so we use the numeric id
+chown -R 399:399 /home/abuild/src/droid/prebuilts/sdk
+%files prebuilts-sdk
+%defattr(-,root,root,-)
+/home/abuild/src/droid/prebuilts/sdk
+
+%post prebuilts-tools
+# The abuild user is not setup at post time so we use the numeric id
+chown -R 399:399 /home/abuild/src/droid/prebuilts/tools
+%files prebuilts-tools
+%defattr(-,root,root,-)
+/home/abuild/src/droid/prebuilts/tools
+
+%post prebuilts-vndk
+# The abuild user is not setup at post time so we use the numeric id
+chown -R 399:399 /home/abuild/src/droid/prebuilts/vndk
+%files prebuilts-vndk
+%defattr(-,root,root,-)
+/home/abuild/src/droid/prebuilts/vndk
 
 %endif
