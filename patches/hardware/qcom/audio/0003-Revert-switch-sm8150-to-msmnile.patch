@@ -1,7 +1,7 @@
-From 8777edbc82d4cce90adcaf2969d8be689fa4efb0 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Bj=C3=B6rn=20Bidar?= <theodorstormgrade@gmail.com>
 Date: Fri, 3 Jul 2020 12:50:49 +0200
-Subject: [PATCH 3/7] Revert "switch sm8150 to msmnile"
+Subject: [PATCH] Revert "switch sm8150 to msmnile"
 
 This reverts commit 8e9b92d2c87e9d1cd96ef153853287cb79d5934c.
 ---
@@ -11,7 +11,7 @@ This reverts commit 8e9b92d2c87e9d1cd96ef153853287cb79d5934c.
  3 files changed, 5 insertions(+), 5 deletions(-)
 
 diff --git a/Android.mk b/Android.mk
-index 34b228a..41109b0 100644
+index 34b228af8ae41743cbdd623505e2a00582e53bfc..41109b02b352c9e460b397e1768ac151d46b5eef 100644
 --- a/Android.mk
 +++ b/Android.mk
 @@ -1,6 +1,6 @@
@@ -23,7 +23,7 @@ index 34b228a..41109b0 100644
      MY_LOCAL_PATH := $(call my-dir)
  
 diff --git a/hal/Android.mk b/hal/Android.mk
-index e6be0a6..acf7e6a 100644
+index e6be0a61fdddd56805fcca17757b1228e47839b3..acf7e6aab1215b4ca0c696eefaf4855fde7b240b 100644
 --- a/hal/Android.mk
 +++ b/hal/Android.mk
 @@ -10,7 +10,7 @@ AUDIO_PLATFORM := $(TARGET_BOARD_PLATFORM)
@@ -45,7 +45,7 @@ index e6be0a6..acf7e6a 100644
    LOCAL_CFLAGS += -DMAX_TARGET_SPECIFIC_CHANNEL_CNT="4"
    LOCAL_CFLAGS += -DINCALL_MUSIC_ENABLED
 diff --git a/post_proc/Android.mk b/post_proc/Android.mk
-index ce84e41..9c658a3 100644
+index ce84e41626058723220667a7e192fb9b82536ac1..9c658a34c68d5f09990a1fcc1f9591bfba1408ba 100644
 --- a/post_proc/Android.mk
 +++ b/post_proc/Android.mk
 @@ -1,4 +1,4 @@
@@ -63,6 +63,3 @@ index ce84e41..9c658a3 100644
  
  include $(CLEAR_VARS)
  
--- 
-2.27.0
-

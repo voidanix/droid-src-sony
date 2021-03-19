@@ -1,7 +1,7 @@
-From cfe59f8057d22e36ff69019781387ef673d8c0d8 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Bj=C3=B6rn=20Bidar?= <theodorstormgrade@gmail.com>
 Date: Fri, 3 Jul 2020 12:50:49 +0200
-Subject: [PATCH 2/7] Revert "Switch msmnile to new Audio HAL"
+Subject: [PATCH] Revert "Switch msmnile to new Audio HAL"
 
 This reverts commit d0d5c9135fed70a25a42f09f0e32b056bc7b15a8.
 ---
@@ -9,7 +9,7 @@ This reverts commit d0d5c9135fed70a25a42f09f0e32b056bc7b15a8.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/Android.mk b/Android.mk
-index 826a88d..34b228a 100644
+index 826a88d501a88781f740fefc02b660cf8d1e6adf..34b228af8ae41743cbdd623505e2a00582e53bfc 100644
 --- a/Android.mk
 +++ b/Android.mk
 @@ -1,6 +1,6 @@
@@ -20,6 +20,3 @@ index 826a88d..34b228a 100644
  
      MY_LOCAL_PATH := $(call my-dir)
  
--- 
-2.27.0
-

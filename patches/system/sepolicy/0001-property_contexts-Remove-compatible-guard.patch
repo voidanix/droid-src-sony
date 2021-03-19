@@ -1,4 +1,4 @@
-From 41745bc85ef135ecb40c1923a5009d88ef576b7f Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Felix <google@ix5.org>
 Date: Tue, 10 Dec 2019 15:49:13 +0100
 Subject: [PATCH] property_contexts: Remove compatible guard
@@ -12,7 +12,7 @@ Change-Id: Id0eb85aed487a78f6dbd6a16f8b5f261918472ee
  1 file changed, 2 deletions(-)
 
 diff --git a/property_contexts.mk b/property_contexts.mk
-index eb19d2080..6a9742043 100644
+index eb19d2080c101c2961d6cc64728bd202ee3ac0f7..6a97420436ea9ceee56a3051017b7bac20716862 100644
 --- a/property_contexts.mk
 +++ b/property_contexts.mk
 @@ -8,9 +8,7 @@ LOCAL_MODULE_PATH := $(TARGET_OUT)/etc/selinux
@@ -25,6 +25,3 @@ index eb19d2080..6a9742043 100644
  
  plat_property_contexts.tmp := $(intermediates)/plat_property_contexts.tmp
  $(plat_property_contexts.tmp): PRIVATE_PC_FILES := $(plat_pcfiles)
--- 
-2.27.0
-

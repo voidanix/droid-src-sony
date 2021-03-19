@@ -1,7 +1,7 @@
-From 84e5930d1dfc9697a8bfadfe64796e9dd68956cb Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Tao Bao <tbao@google.com>
 Date: Wed, 15 May 2019 10:00:47 -0700
-Subject: [PATCH 2/4] Revert^2 "Build bootctrl.msm8998 with Android.bp.""
+Subject: [PATCH] Revert^2 "Build bootctrl.msm8998 with Android.bp.""
 
 This reverts commit 28b533bd96d92d7a3bf880575b183cfffe05cd12.
 
@@ -15,7 +15,7 @@ Merged-In: I6a85b7885903df818deb32c40c751ac4358a6dbc
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/Android.mk b/Android.mk
-index 6029054..4b94b7a 100644
+index 6029054e94c7d868da53ab665b79fd3778d629db..4b94b7af134b16e85f46e3ed14db2c5abc187690 100644
 --- a/Android.mk
 +++ b/Android.mk
 @@ -1,5 +1,5 @@
@@ -25,6 +25,3 @@ index 6029054..4b94b7a 100644
  TARGET_USES_HARDWARE_QCOM_BOOTCTRL := true
  endif
  
--- 
-2.27.0
-
