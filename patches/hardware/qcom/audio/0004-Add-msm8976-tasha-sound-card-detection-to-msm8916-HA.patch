@@ -1,7 +1,7 @@
-From c86a2ce33b6b3478df02b05133a2ed102aa86813 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Adam Farden <adam@farden.cz>
 Date: Thu, 9 Aug 2018 09:26:47 +0200
-Subject: [PATCH 4/7] Add msm8976 tasha sound card detection to msm8916 HAL
+Subject: [PATCH] Add msm8976 tasha sound card detection to msm8916 HAL
 
 msm8976 is a variant of msm8952, both use the msm8916 HAL
 
@@ -23,7 +23,7 @@ Signed-off-by: Tim <tomgus1.2@gmail.com>
  2 files changed, 7 insertions(+), 5 deletions(-)
 
 diff --git a/hal/msm8916/hw_info.c b/hal/msm8916/hw_info.c
-index 0afb510..095d052 100644
+index 0afb5104f43a377fb9fbe75ab617e70d1fc536d0..095d0529141180d937687a4f215300962126a7c6 100644
 --- a/hal/msm8916/hw_info.c
 +++ b/hal/msm8916/hw_info.c
 @@ -54,8 +54,10 @@ static void update_hardware_info_8x16(struct hardware_info *hw_info, const char
@@ -50,7 +50,7 @@ index 0afb510..095d052 100644
          ALOGV("8x16 - variant soundcard");
  
 diff --git a/post_proc/Android.mk b/post_proc/Android.mk
-index 9c658a3..c800d8f 100644
+index 9c658a34c68d5f09990a1fcc1f9591bfba1408ba..c800d8f890460c6ed4e67088d37d82c4d6c95a29 100644
 --- a/post_proc/Android.mk
 +++ b/post_proc/Android.mk
 @@ -1,4 +1,4 @@
@@ -68,6 +68,3 @@ index 9c658a3..c800d8f 100644
  
  include $(CLEAR_VARS)
  
--- 
-2.27.0
-

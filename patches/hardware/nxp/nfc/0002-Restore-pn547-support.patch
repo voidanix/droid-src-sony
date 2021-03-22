@@ -1,7 +1,7 @@
-From 437a07723d371299ab2e46504c9eaab720855734 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Humberto Borba <humberos@omnirom.org>
 Date: Sat, 1 Sep 2018 21:24:56 -0300
-Subject: [PATCH 2/2] Restore pn547 support
+Subject: [PATCH] Restore pn547 support
 
 Test: Compile with current AOSP master,
 boot device with PN547C2 chip, read/write NFC tag OK.
@@ -22,7 +22,7 @@ Change-Id: I226fa084d22850a8610f1d67ef30b96250fbd570
  7 files changed, 133 insertions(+), 80 deletions(-)
 
 diff --git a/extns/impl/Nxp_Features.h b/extns/impl/Nxp_Features.h
-index 1a2bf41..45df756 100755
+index 1a2bf4182b0cdc2847268162295ddc0794954bca..45df7561b94803e884e7090f7d3ff25b7ff9e594 100755
 --- a/extns/impl/Nxp_Features.h
 +++ b/extns/impl/Nxp_Features.h
 @@ -25,6 +25,7 @@
@@ -59,7 +59,7 @@ index 1a2bf41..45df756 100755
    }
  #define STRCPY_FW_LIB(str) {                                                \
 diff --git a/halimpl/dnld/phDnldNfc.cc b/halimpl/dnld/phDnldNfc.cc
-index 36ea2f4..f2a16e5 100644
+index 36ea2f468e548a9bd0b0aa73a38bcd4108781a93..f2a16e59b164043c774da8b5e9cbd8091303d83c 100644
 --- a/halimpl/dnld/phDnldNfc.cc
 +++ b/halimpl/dnld/phDnldNfc.cc
 @@ -753,7 +753,7 @@ NFCSTATUS phDnldNfc_InitImgInfo(void) {
@@ -90,7 +90,7 @@ index 36ea2f4..f2a16e5 100644
    else
      wStatus = phDnldNfc_LoadFW(&pImageInfo, &ImageInfoLen);
 diff --git a/halimpl/dnld/phNxpNciHal_Dnld.cc b/halimpl/dnld/phNxpNciHal_Dnld.cc
-index 4392128..95411c0 100644
+index 4392128996781bf7c77b91c7f5d09b20f74d9288..95411c0e2ac76e6381c6382a3cd4e9f81e469143 100644
 --- a/halimpl/dnld/phNxpNciHal_Dnld.cc
 +++ b/halimpl/dnld/phNxpNciHal_Dnld.cc
 @@ -1700,7 +1700,7 @@ NFCSTATUS phNxpNciHal_fw_download_seq(uint8_t bClkSrcVal, uint8_t bClkFreqVal) {
@@ -103,7 +103,7 @@ index 4392128..95411c0 100644
            phNxpNciHal_fw_seq_handler(phNxpNciHal_dummy_rec_dwnld_seqhandler);
      } else {
 diff --git a/halimpl/hal/phNxpNciHal.cc b/halimpl/hal/phNxpNciHal.cc
-index 664dc96..9e6efb8 100755
+index 664dc96e55225b27bfd0fabdbdd6836cd89b577c..9e6efb884c4eb388fb42131d2b348d722f66d117 100755
 --- a/halimpl/hal/phNxpNciHal.cc
 +++ b/halimpl/hal/phNxpNciHal.cc
 @@ -461,7 +461,7 @@ static NFCSTATUS phNxpNciHal_CheckValidFwVersion(void) {
@@ -384,7 +384,7 @@ index 664dc96..9e6efb8 100755
      phNxpNciHal_core_initialized_complete(status);
    else {
 diff --git a/halimpl/hal/phNxpNciHal.h b/halimpl/hal/phNxpNciHal.h
-index 79791f9..55ef903 100755
+index 79791f9bb8fff465c744fcd7057d5d2ca7ae9891..55ef90340402d3141e8b9edd116a93a7afc477ba 100755
 --- a/halimpl/hal/phNxpNciHal.h
 +++ b/halimpl/hal/phNxpNciHal.h
 @@ -33,6 +33,7 @@
@@ -396,7 +396,7 @@ index 79791f9..55ef903 100755
  #define FW_MOBILE_ROM_VERSION_PN551 0x10
  #define FW_MOBILE_ROM_VERSION_PN553 0x11
 diff --git a/halimpl/hal/phNxpNciHal_ext.cc b/halimpl/hal/phNxpNciHal_ext.cc
-index d1267d2..92b2321 100755
+index d1267d2dba5a742a00da8c65a02446e9e648000c..92b23214c60a86c6ad8a8760b9dd8c2e7e6010af 100755
 --- a/halimpl/hal/phNxpNciHal_ext.cc
 +++ b/halimpl/hal/phNxpNciHal_ext.cc
 @@ -93,6 +93,7 @@ void phNxpNciHal_ext_init(void) {
@@ -460,7 +460,7 @@ index d1267d2..92b2321 100755
        status = NFCSTATUS_SUCCESS;
      }
 diff --git a/halimpl/utils/NxpNfcCapability.cpp b/halimpl/utils/NxpNfcCapability.cpp
-index 720ed08..51752ca 100644
+index 720ed08dedfc4d74011bac59ec59564b51c14a8f..51752ca39bd7dc5695d517ee0a32983a4a48620d 100644
 --- a/halimpl/utils/NxpNfcCapability.cpp
 +++ b/halimpl/utils/NxpNfcCapability.cpp
 @@ -92,6 +92,10 @@ tNFC_chipType capability::getChipType(uint8_t* msg, uint16_t msg_len) {
@@ -474,6 +474,3 @@ index 720ed08..51752ca 100644
          case 0x18:
          case 0x58:  // NQ220
            chipType = pn66T;
--- 
-2.27.0
-

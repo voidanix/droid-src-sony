@@ -1,7 +1,7 @@
-From b961d0830294845c81e2d12911a45c363b8564cf Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Alin Jerpelea <alin.jerpelea@sony.com>
 Date: Thu, 9 Aug 2018 09:34:06 +0200
-Subject: [PATCH 5/7] hal: enable audio hal on sdm660
+Subject: [PATCH] hal: enable audio hal on sdm660
 
 the sdm660 SOC can use the same HAL as the other QCOM SOCs
 
@@ -28,7 +28,7 @@ Signed-off-by: Tim <tomgus1.2@gmail.com>
  4 files changed, 10 insertions(+), 5 deletions(-)
 
 diff --git a/Android.mk b/Android.mk
-index 41109b0..e23010d 100644
+index 41109b02b352c9e460b397e1768ac151d46b5eef..e23010dd67da1546d43e770e5b5f4b842e6a80fb 100644
 --- a/Android.mk
 +++ b/Android.mk
 @@ -1,6 +1,6 @@
@@ -40,7 +40,7 @@ index 41109b0..e23010d 100644
      MY_LOCAL_PATH := $(call my-dir)
  
 diff --git a/hal/Android.mk b/hal/Android.mk
-index acf7e6a..5576fe3 100644
+index acf7e6aab1215b4ca0c696eefaf4855fde7b240b..5576fe37f43f03d1b603507e183764bf7fd14317 100644
 --- a/hal/Android.mk
 +++ b/hal/Android.mk
 @@ -71,7 +71,7 @@ ifneq ($(filter sm8150,$(TARGET_BOARD_PLATFORM)),)
@@ -53,7 +53,7 @@ index acf7e6a..5576fe3 100644
    LOCAL_CFLAGS := -DPLATFORM_MSM8916
  ifneq ($(filter msm8909,$(TARGET_BOARD_PLATFORM)),)
 diff --git a/hal/msm8916/hw_info.c b/hal/msm8916/hw_info.c
-index 095d052..de4e6a7 100644
+index 095d0529141180d937687a4f215300962126a7c6..de4e6a7f01452e331d3af48fe152ba2075632b26 100644
 --- a/hal/msm8916/hw_info.c
 +++ b/hal/msm8916/hw_info.c
 @@ -56,8 +56,12 @@ static void update_hardware_info_8x16(struct hardware_info *hw_info, const char
@@ -79,7 +79,7 @@ index 095d052..de4e6a7 100644
          ALOGV("8x16 - variant soundcard");
  
 diff --git a/post_proc/Android.mk b/post_proc/Android.mk
-index c800d8f..5677f81 100644
+index c800d8f890460c6ed4e67088d37d82c4d6c95a29..5677f81ac36d4f62af696937f5beb0bfc0c9a763 100644
 --- a/post_proc/Android.mk
 +++ b/post_proc/Android.mk
 @@ -1,4 +1,4 @@
@@ -97,6 +97,3 @@ index c800d8f..5677f81 100644
  
  include $(CLEAR_VARS)
  
--- 
-2.27.0
-

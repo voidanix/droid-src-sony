@@ -1,4 +1,4 @@
-From 5ef17b7e68dcf8dfa3a9030dd92ee51fa2da402d Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: MarijnS95 <marijns95@gmail.com>
 Date: Mon, 9 Sep 2019 15:50:43 +0200
 Subject: [PATCH] verity: Do not increment data when it is nullptr.
@@ -20,7 +20,7 @@ Signed-off-by: MarijnS95 <marijns95@gmail.com>
  1 file changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/verity/hash_tree_builder.cpp b/verity/hash_tree_builder.cpp
-index 197c38e5..d061ca5c 100644
+index 197c38e5a79989e049b4a0e0cca1743afc8ba078..d061ca5c08293fe54c0ee8a8ecbfea4f896e0bdc 100644
 --- a/verity/hash_tree_builder.cpp
 +++ b/verity/hash_tree_builder.cpp
 @@ -197,7 +197,9 @@ bool HashTreeBuilder::Update(const unsigned char* data, size_t len) {
@@ -34,6 +34,3 @@ index 197c38e5..d061ca5c 100644
      len -= append_len;
    }
    if (len % block_size_ != 0) {
--- 
-2.27.0
-

@@ -1,4 +1,4 @@
-From e1488dc11b06ece2aab0dc946bbd3e670424e0db Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Raman Tenneti <rtenneti@google.com>
 Date: Thu, 20 Jun 2019 16:06:57 -0700
 Subject: [PATCH] DeskClock - Moved the android:targetSdkVersion to 25 to fix
@@ -53,7 +53,7 @@ Change-Id: I75a96e1ed4acebd118c212b51b7d0e57482a66bb
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/AndroidManifest.xml b/AndroidManifest.xml
-index cf4271338..487361e38 100644
+index cf42713385a917e7d9360553501063b378de3099..487361e3814ffab15d7427d4dc0b7a70b96fe59c 100644
 --- a/AndroidManifest.xml
 +++ b/AndroidManifest.xml
 @@ -22,13 +22,14 @@
@@ -72,6 +72,3 @@ index cf4271338..487361e38 100644
  
      <!-- WRITE_SETTINGS is required to record the upcoming alarm prior to L -->
      <uses-permission
--- 
-2.27.0
-

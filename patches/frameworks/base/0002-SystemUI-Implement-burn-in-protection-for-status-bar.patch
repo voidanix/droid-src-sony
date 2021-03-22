@@ -1,8 +1,8 @@
-From 76a45670de0fe6929dbfdf8a862ece99acdd8e26 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Park Ju Hyung <qkrwngud825@gmail.com>
 Date: Sun, 15 Jan 2017 03:33:04 +0900
-Subject: [PATCH 2/2] SystemUI: Implement burn-in protection for
- status-bar/nav-bar items
+Subject: [PATCH] SystemUI: Implement burn-in protection for status-bar/nav-bar
+ items
 
 Devices with OLED display suffer from
 status-bar's notification items and nagivation bar's software keys
@@ -36,7 +36,7 @@ Signed-off-by: Pablo Mendez Hernandez <pablomh@gmail.com>
  create mode 100644 packages/SystemUI/src/com/android/systemui/statusbar/policy/BurnInProtectionController.java
 
 diff --git a/packages/SystemUI/res/values/config.xml b/packages/SystemUI/res/values/config.xml
-index c2189a30f23..1796fa6276f 100644
+index c2189a30f237d7b1fe80630edad7ddf8bfd18d4e..1796fa6276f54eb97da30381329b2f65db98d60d 100644
 --- a/packages/SystemUI/res/values/config.xml
 +++ b/packages/SystemUI/res/values/config.xml
 @@ -87,11 +87,20 @@
@@ -62,7 +62,7 @@ index c2189a30f23..1796fa6276f 100644
      <integer name="quick_qs_panel_max_columns">6</integer>
  
 diff --git a/packages/SystemUI/res/values/dimens.xml b/packages/SystemUI/res/values/dimens.xml
-index 0263329dbe8..c25460ca8c5 100644
+index 0263329dbe8e76beacded720fa89c5f13b391914..c25460ca8c5d744dc46497c3595c9e56b5a93d34 100644
 --- a/packages/SystemUI/res/values/dimens.xml
 +++ b/packages/SystemUI/res/values/dimens.xml
 @@ -966,6 +966,14 @@
@@ -81,7 +81,7 @@ index 0263329dbe8..c25460ca8c5 100644
      <dimen name="top_padding">0dp</dimen>
      <dimen name="bottom_padding">48dp</dimen>
 diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/phone/NavigationBarView.java b/packages/SystemUI/src/com/android/systemui/statusbar/phone/NavigationBarView.java
-index a2740c8dc32..2cef0a4bbd2 100644
+index a2740c8dc322ed0335eb929ef52ef60e49f00c70..2cef0a4bbd26deb245667fb7c345f5c0093f5055 100644
 --- a/packages/SystemUI/src/com/android/systemui/statusbar/phone/NavigationBarView.java
 +++ b/packages/SystemUI/src/com/android/systemui/statusbar/phone/NavigationBarView.java
 @@ -153,6 +153,13 @@ public class NavigationBarView extends FrameLayout implements
@@ -132,7 +132,7 @@ index a2740c8dc32..2cef0a4bbd2 100644
          updateOrientationViews();
          reloadNavIcons();
 diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBarView.java b/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBarView.java
-index 3d705da65f2..4fb229c67b0 100644
+index 3d705da65f2bd1491c4755dfe08eb667f45244db..4fb229c67b058e0e599a24870b3812441a7279b2 100644
 --- a/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBarView.java
 +++ b/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBarView.java
 @@ -26,6 +26,7 @@ import static java.lang.Float.isNaN;
@@ -191,7 +191,7 @@ index 3d705da65f2..4fb229c67b0 100644
  
      @Override
 diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBar.java b/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBar.java
-index cc691ae2d9b..a9a495f8e85 100644
+index cc691ae2d9bec7584c75726bdc4ae62b030e859d..a9a495f8e859a4aec03e2ea4664088b42c408539 100644
 --- a/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBar.java
 +++ b/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBar.java
 @@ -214,6 +214,7 @@ import com.android.systemui.statusbar.phone.UnlockMethodCache.OnUnlockMethodChan
@@ -242,7 +242,7 @@ index cc691ae2d9b..a9a495f8e85 100644
  
 diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/policy/BurnInProtectionController.java b/packages/SystemUI/src/com/android/systemui/statusbar/policy/BurnInProtectionController.java
 new file mode 100644
-index 00000000000..a2fd65fbac9
+index 0000000000000000000000000000000000000000..a2fd65fbac9e8140c115d8df4e14b740110204bd
 --- /dev/null
 +++ b/packages/SystemUI/src/com/android/systemui/statusbar/policy/BurnInProtectionController.java
 @@ -0,0 +1,121 @@
@@ -367,6 +367,3 @@ index 00000000000..a2fd65fbac9
 +        if (DEBUG) Log.d(TAG, "Shifting items..");
 +    }
 +}
--- 
-2.27.0
-

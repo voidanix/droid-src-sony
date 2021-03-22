@@ -1,0 +1,34 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: AngeloGioacchino Del Regno <kholk11@gmail.com>
+Date: Fri, 30 Oct 2020 19:18:47 +0100
+Subject: [PATCH] audio_extn: cirrus_sony: Force CS35L41 wakeup during playback
+
+The CS35L41 codec may not be waking up on its own for firmware
+issues. Since we know when we start playing back audio and when
+we actually stop to, let's force it off of hibernation.
+---
+ hal/audio_extn/cirrus_sony.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/hal/audio_extn/cirrus_sony.c b/hal/audio_extn/cirrus_sony.c
+index 1d727aee4185dbed3d41f0f95cc93c530b026178..8bb08aa23c137637ecadebe64513a9567470279d 100644
+--- a/hal/audio_extn/cirrus_sony.c
++++ b/hal/audio_extn/cirrus_sony.c
+@@ -1434,6 +1434,8 @@ int spkr_prot_start_processing(__unused snd_device_t snd_device) {
+ 
+     pthread_mutex_lock(&handle.fb_prot_mutex);
+ 
++    ret = cirrus_set_force_wake(true);
++
+     audio_route_apply_and_update_path(adev->audio_route,
+                                       fp_platform_get_snd_device_name(snd_device));
+ 
+@@ -1465,6 +1467,8 @@ void spkr_prot_stop_processing(__unused snd_device_t snd_device) {
+ 
+     pthread_mutex_unlock(&handle.fb_prot_mutex);
+ 
++    (void)cirrus_set_force_wake(false);
++
+     ALOGV("%s: Exit", __func__);
+ }
+ 

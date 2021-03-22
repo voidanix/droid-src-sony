@@ -1,7 +1,7 @@
-From 1b07a414800a385e889e288f49a325585fb306a7 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Tao Bao <tbao@google.com>
 Date: Tue, 28 May 2019 14:49:41 -0700
-Subject: [PATCH 4/4] Remove Android.mk rules for building bootctrl.
+Subject: [PATCH] Remove Android.mk rules for building bootctrl.
 
 All the targets that need the bootctrl.$(TARGET_BOARD_PLATFORM) in this
 dir should build the module with Android.bp, which is also the desired
@@ -24,7 +24,7 @@ Change-Id: Ib110508065f47a742acd92e03ea42901e8002e4f
 
 diff --git a/Android.mk b/Android.mk
 deleted file mode 100644
-index e1794d5..0000000
+index e1794d54918c47c206f43ba56a29b44bb120a86b..0000000000000000000000000000000000000000
 --- a/Android.mk
 +++ /dev/null
 @@ -1,30 +0,0 @@
@@ -58,6 +58,3 @@ index e1794d5..0000000
 -
 -endif
 -endif
--- 
-2.27.0
-
