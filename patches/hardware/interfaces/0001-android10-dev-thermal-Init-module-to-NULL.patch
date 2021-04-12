@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Marijn Suijten <marijns95@gmail.com>
 Date: Thu, 28 May 2020 23:55:25 +0200
-Subject: [PATCH] thermal: Init module to NULL
+Subject: [PATCH] [android10-dev] thermal: Init module to NULL
 
 It was this way on Android 9, and we don't want to force
 everyone to include a thermal.default module.
