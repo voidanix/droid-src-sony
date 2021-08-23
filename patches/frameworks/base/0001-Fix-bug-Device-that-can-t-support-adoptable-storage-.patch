@@ -23,10 +23,10 @@ Signed-off-by: Sangho Yoon <sangho.yoon@lge.com>
  1 file changed, 2 insertions(+)
 
 diff --git a/services/core/java/com/android/server/StorageManagerService.java b/services/core/java/com/android/server/StorageManagerService.java
-index deff7ef7d39acfee0b07c750ddbb76eee585049d..72f40cc035183c124a7bb706c4c32831cb88b1d7 100644
+index 392894616bf43908da060d4a90f4749728bb50c2..0199a585a551148aa2059439b7640ffb6aa7e0fd 100644
 --- a/services/core/java/com/android/server/StorageManagerService.java
 +++ b/services/core/java/com/android/server/StorageManagerService.java
-@@ -1284,6 +1284,8 @@ class StorageManagerService extends IStorageManager.Stub
+@@ -1535,6 +1535,8 @@ class StorageManagerService extends IStorageManager.Stub
              // public API requirement of being in a stable location.
              if (vol.disk.isAdoptable()) {
                  vol.mountFlags |= VolumeInfo.MOUNT_FLAG_VISIBLE;

@@ -15,7 +15,7 @@ Signed-off-by: Alin Jerpelea <alin.jerpelea@sony.com>
  3 files changed, 7 insertions(+)
 
 diff --git a/ipacm/src/Android.mk b/ipacm/src/Android.mk
-index e7f5d21660fa3fd4888f6590135e3de6c84c1017..5a6fef8423e7e1f548e830aeb2bbc4bbd3aaa5e4 100644
+index cff09603b4c87afba46bcc78c861f5eba602b952..c6196a24afe62ce8488003d9bae88884df315d93 100644
 --- a/ipacm/src/Android.mk
 +++ b/ipacm/src/Android.mk
 @@ -14,8 +14,10 @@ include $(CLEAR_VARS)

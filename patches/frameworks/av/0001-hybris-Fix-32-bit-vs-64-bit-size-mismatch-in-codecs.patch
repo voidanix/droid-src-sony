@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Matti Lehtimaki <matti.lehtimaki@jolla.com>
 Date: Thu, 5 Nov 2020 20:46:35 +0200
-Subject: [PATCH] (hybris) Fix 32-bit vs 64-bit size mismatch in codecs.
+Subject: [PATCH] Fix 32-bit vs 64-bit size mismatch in codecs.
 
 Change-Id: I50e928113f90eea9d85f79f183c4b74113ab73bf
 ---

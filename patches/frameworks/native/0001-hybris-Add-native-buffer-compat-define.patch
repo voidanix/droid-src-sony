@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Matti Lehtimaki <matti.lehtimaki@jolla.com>
 Date: Thu, 5 Nov 2020 20:50:40 +0200
-Subject: [PATCH] (hybris) Add native buffer compat define.
+Subject: [PATCH] Add native buffer compat define.
 
 Change-Id: Iaa50a8270fc822fa3aacec07a5dcdfc467752afe
 ---
