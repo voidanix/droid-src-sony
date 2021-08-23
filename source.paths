@@ -30,6 +30,7 @@ prebuilts/checkcolor
 prebuilts/checkstyle
 prebuilts/clang-tools
 prebuilts/clang
+prebuilts/cmdline-tools
 prebuilts/devtools
 prebuilts/fuchsia_sdk
 prebuilts/gcc
@@ -44,6 +45,7 @@ prebuilts/misc
 prebuilts/ndk
 prebuilts/python
 prebuilts/r8
+prebuilts/rust/linux-x86
 prebuilts/sdk
 prebuilts/tools
 prebuilts/vndk

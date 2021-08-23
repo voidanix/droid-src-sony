@@ -2,14 +2,14 @@
 # Replace @...@ accordingly
 
 # device is the codename for the device
-%define device pdx201
+%define device pdx213
 
-%define ha_device_override sony-seine
+%define ha_device_override sony-lena
 
 %include define-trees
 
 %define device_variant -user
-%define lunch_device aosp_xqau52
+%define lunch_device aosp_xqbt52
 %define pre_actions sudo update-java-alternatives -s java-1.8.0-openjdk-amd64
 
 %define post_build_actions mv rpm/patches patches; /bin/sh ./rpm/apply-patches.sh
