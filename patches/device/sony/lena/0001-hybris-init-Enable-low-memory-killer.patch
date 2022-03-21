@@ -1,0 +1,36 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Simonas Leleiva <simonas.leleiva@meramo.co.uk>
+Date: Sat, 12 Mar 2022 14:53:48 +0000
+Subject: [PATCH] (hybris) init: Enable low memory killer
+
+minfree values have been set to be 50% higher than in Xperia 10 II.
+
+This is to allow extra memory buffer for any apps that might need to
+allocate a bigger chunk every so often.
+
+Such increase is safe for Xperia 10 III -- it will still be able to
+multitask many apps simultaneously (as opposed to 10 II), because it
+has more RAM.
+
+[hybris] init: Enable low memory killer. JB#57685
+
+Signed-off-by: Simonas Leleiva <simonas.leleiva@jolla.com>
+---
+ rootdir/vendor/etc/init/init.lena.rc | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/rootdir/vendor/etc/init/init.lena.rc b/rootdir/vendor/etc/init/init.lena.rc
+index 74f540e741333057527a09833baa24d8178e798a..5f6c8c8a60a03064713a7d2c3cd3ea5cf64c1679 100644
+--- a/rootdir/vendor/etc/init/init.lena.rc
++++ b/rootdir/vendor/etc/init/init.lena.rc
+@@ -69,3 +69,10 @@ on property:sys.boot_completed=1
+     write /sys/block/sdc/queue/iostats 1
+     write /sys/block/dm-0/queue/read_ahead_kb 512
+     write /sys/block/dm-1/queue/read_ahead_kb 512
++
++    # LMK tunning
++    write /sys/module/lowmemorykiller/parameters/enable_lmk 1
++    write /sys/module/lowmemorykiller/parameters/minfree "167160,190200,213240,236280,356490"
++    write /sys/module/lowmemorykiller/parameters/adj "0,58,147,529,1000"
++    write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 105984
++    write /sys/module/lowmemorykiller/parameters/oom_reaper 1
