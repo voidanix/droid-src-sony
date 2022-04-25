@@ -1,0 +1,39 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Juho=20H=C3=A4m=C3=A4l=C3=A4inen?=
+ <juho.hamalainen@jolla.com>
+Date: Mon, 25 Apr 2022 11:15:00 +0000
+Subject: [PATCH] (hybris) mixer_paths: Use handset mic for speaker mode
+ workaround.
+
+Microphone is muted with speaker route during voice calls and VOIP
+calls. As a workaround use handset mic config for the speaker use case
+as well. It's not nearly optimal as it introduces pretty bad echo for
+the caller in as echo cancellation is not working as it should but it's
+better than the alternative of no sound from microphone at all.
+
+[hybris] mixer_paths: Use handset mic for speaker mode workaround. JB#57389
+---
+ rootdir/vendor/etc/mixer_paths.xml | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/rootdir/vendor/etc/mixer_paths.xml b/rootdir/vendor/etc/mixer_paths.xml
+index 0afabf594e482ecbd2a746085ea15e403edad768..0ddc82d04d3955805d40084f2a8fc9295b7506b3 100644
+--- a/rootdir/vendor/etc/mixer_paths.xml
++++ b/rootdir/vendor/etc/mixer_paths.xml
+@@ -3665,6 +3665,8 @@
+     </path>
+ 
+     <path name="speaker-dmic-endfire">
++        <path name="handset-dmic-endfire" />
++        <!-- original
+         <ctl name="TX_CDC_DMA_TX_3 Channels" value="Two" />
+         <ctl name="TX DEC1 MUX" value="SWR_MIC" />
+         <ctl name="TX SMIC MUX1" value="ADC3" />
+@@ -3675,6 +3677,7 @@
+         <ctl name="TX_AIF1_CAP Mixer DEC2" value="1" />
+         <ctl name="ADC2_MIXER Switch" value="1" />
+         <ctl name="ADC2 MUX" value="INP3" />
++        -->
+     </path>
+ 
+     <path name="stereo-mic">
