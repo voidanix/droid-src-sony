@@ -23,14 +23,12 @@ diff --git a/rootdir/vendor/etc/init/init.lena.rc b/rootdir/vendor/etc/init/init
 index 74f540e741333057527a09833baa24d8178e798a..5f6c8c8a60a03064713a7d2c3cd3ea5cf64c1679 100644
 --- a/rootdir/vendor/etc/init/init.lena.rc
 +++ b/rootdir/vendor/etc/init/init.lena.rc
-@@ -69,3 +69,10 @@ on property:sys.boot_completed=1
-     write /sys/block/sdc/queue/iostats 1
-     write /sys/block/dm-0/queue/read_ahead_kb 512
-     write /sys/block/dm-1/queue/read_ahead_kb 512
-+
-+    # LMK tunning
-+    write /sys/module/lowmemorykiller/parameters/enable_lmk 1
+@@ -72,6 +72,7 @@ on property:sys.boot_completed=1
+
+     # LMK tuning
+     write /sys/module/lowmemorykiller/parameters/enable_lmk 1
+-    write /sys/module/lowmemorykiller/parameters/minfree "15360,19200,23040,26880,34415,43737"
 +    write /sys/module/lowmemorykiller/parameters/minfree "167160,190200,213240,236280,356490"
 +    write /sys/module/lowmemorykiller/parameters/adj "0,58,147,529,1000"
-+    write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 105984
-+    write /sys/module/lowmemorykiller/parameters/oom_reaper 1
+     write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 105984
+     write /sys/module/lowmemorykiller/parameters/oom_reaper 1
