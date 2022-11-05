@@ -30,8 +30,7 @@ Source52: %{dhs_name_hardcoded}.spec.tmpl\
 Source53: source.paths\
 Source54: apply-patches.sh\
 Source55: precheckin.sh\
-# repo service performed : %%include other-tmpl-sources
-# Couldnt open other-tmpl-sources
+Source100: droid-src-sony-edo.spec.tmpl\
 %{nil}
 
 # repo service performed : %%include dhs/droid-hal-source.inc
